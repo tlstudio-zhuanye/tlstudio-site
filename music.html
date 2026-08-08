@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TL鍏嶈垂骞插０ - AI 闊充箰鍒嗙锛屼竴閿彁鍙栦汉澹颁笌浼村</title>
+<title>TL免费干声 - AI 音乐分离，一键提取人声与伴奏</title>
 <style>
 /* ========== Reset & Base ========== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,8 +14,8 @@
   --border: #e0e0e0;
   --text: #1a1a1a;
   --text-secondary: #888888;
-  --accent: #C8A000;
-  --accent-hover: #A68400;
+  --accent: #0066cc;
+  --accent-hover: #0052a3;
   --success: #2ea043;
   --error: #cf222e;
   --purple: #8250df;
@@ -57,7 +57,7 @@ a { text-decoration: none; color: inherit; }
   font-weight: 700; font-size: 1.05rem; color: var(--text);
 }
 .nav-logo {
-  width: 30px; height: 30px; background: linear-gradient(135deg, #D4A000, #C8A000);
+  width: 30px; height: 30px; background: var(--accent);
   border-radius: 7px; display: flex; align-items: center; justify-content: center;
   color: #fff; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.5px;
 }
@@ -82,7 +82,7 @@ a { text-decoration: none; color: inherit; }
   position: relative; min-height: 100vh;
   display: flex; align-items: center; justify-content: center;
   text-align: center; overflow: hidden;
-  background: linear-gradient(170deg, #fffaf0 0%, #ffffff 40%, #f8f0ff 70%, #fff 100%);
+  background: linear-gradient(170deg, #f0f6ff 0%, #ffffff 40%, #f8f0ff 70%, #fff 100%);
 }
 #heroCanvas {
   position: absolute; inset: 0; z-index: 0;
@@ -96,7 +96,7 @@ a { text-decoration: none; color: inherit; }
 }
 .hero-mask {
   width: 72px; height: 72px; margin: 0 auto 20px;
-  filter: drop-shadow(0 4px 12px rgba(200,160,0,0.25));
+  filter: drop-shadow(0 4px 12px rgba(0,102,204,0.25));
   animation: maskPulse 3s ease-in-out infinite;
 }
 @keyframes maskPulse {
@@ -109,14 +109,14 @@ a { text-decoration: none; color: inherit; }
 .hero-badge {
   display: inline-block;
   padding: 5px 14px; border-radius: 20px;
-  background: rgba(200,160,0,0.08); color: var(--accent);
+  background: rgba(0,102,204,0.08); color: var(--accent);
   font-size: 0.8rem; font-weight: 600; margin-bottom: 24px;
 }
 .hero h1 {
   font-size: clamp(2.2rem, 5vw, 3.4rem);
   font-weight: 800; line-height: 1.2;
   margin-bottom: 20px;
-  background: linear-gradient(135deg, #D4A000 0%, #F0D060 30%, #C8A000 60%, #A68400 100%);
+  background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
@@ -128,16 +128,16 @@ a { text-decoration: none; color: inherit; }
 .btn-primary {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 16px 40px; border-radius: 12px;
-  background: linear-gradient(135deg, #D4A000, #C8A000); color: #fff;
+  background: var(--accent); color: #fff;
   font-size: 1.05rem; font-weight: 600;
   border: none; cursor: pointer;
   transition: all 0.25s;
-  box-shadow: 0 4px 16px rgba(200,160,0,0.25);
+  box-shadow: 0 4px 16px rgba(0,102,204,0.25);
 }
 .btn-primary:hover {
-  background: linear-gradient(135deg, #B89400, #A68400);
+  background: var(--accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(200,160,0,0.3);
+  box-shadow: 0 8px 24px rgba(0,102,204,0.3);
 }
 .btn-primary:active { transform: translateY(0); }
 .btn-primary svg { width: 18px; height: 18px; }
@@ -179,7 +179,7 @@ section { padding: 100px 0; }
 .feature-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 32px rgba(0,0,0,0.06);
-  border-color: rgba(200,160,0,0.2);
+  border-color: rgba(0,102,204,0.2);
 }
 .feature-card:hover::before { transform: scaleX(1); }
 .feature-icon {
@@ -234,7 +234,7 @@ section { padding: 100px 0; }
 }
 .mockup-body .mock-btn {
   padding: 8px 24px; border-radius: 8px;
-  background: linear-gradient(135deg, #D4A000, #C8A000); color: #fff; font-size: 0.8rem;
+  background: var(--accent); color: #fff; font-size: 0.8rem;
   border: none; opacity: 0.6;
 }
 .highlights-list { list-style: none; display: flex; flex-direction: column; gap: 24px; }
@@ -266,7 +266,7 @@ section { padding: 100px 0; }
   border-color: var(--accent); color: var(--accent);
   transform: translateY(-2px);
 }
-.tech-tag.accent { border-color: var(--accent); color: var(--accent); background: rgba(200,160,0,0.06); }
+.tech-tag.accent { border-color: var(--accent); color: var(--accent); background: rgba(0,102,204,0.06); }
 .tech-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
   max-width: 800px; margin: 0 auto;
@@ -280,7 +280,7 @@ section { padding: 100px 0; }
 
 /* ========== CTA Bottom ========== */
 .cta-bottom {
-  background: linear-gradient(170deg, #fffaf0 0%, #f8f0ff 100%);
+  background: linear-gradient(170deg, #f0f6ff 0%, #f8f0ff 100%);
   text-align: center; padding: 100px 0;
 }
 .cta-bottom h2 {
@@ -362,7 +362,7 @@ section { padding: 100px 0; }
 }
 .download-option:hover {
   background: rgba(255,255,255,0.85);
-  border-color: rgba(200,160,0,0.15);
+  border-color: rgba(0,102,204,0.15);
   box-shadow: 0 4px 16px rgba(0,0,0,0.06);
   transform: translateY(-2px);
 }
@@ -426,12 +426,13 @@ section { padding: 100px 0; }
   <div class="nav-inner">
     <div class="nav-brand">
       <div class="nav-logo">TL</div>
-      <span>TL鍏嶈垂骞插０</span>
+      <span>TL免费干声</span>
     </div>
     <div class="nav-links" id="navLinks">
-      <a href="#features">鍔熻兘鐗硅壊</a>
-      <a href="#highlights">涓嬭浇</a>
-      <a href="#tech">鍏充簬</a>
+         <a href="#features">功能特色</a>
+      <a href="#highlights">下载</a>
+      <a href="#tech">关于</a>
+      <a href="https://tlstudio.cn/vip.html">会员入口</a>
     </div>
     <div class="nav-hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
       <span></span><span></span><span></span>
@@ -444,12 +445,12 @@ section { padding: 100px 0; }
   <canvas id="heroCanvas"></canvas>
   <div class="hero-content">
     <img class="hero-mask" src="data:image/png;base64,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nNh/zjnn8Pe6ujr+XL16tXXSSSfxs3nbwHNcdtllVkNDQ6eTFd9qADLSHH300dS9e3ceAZqamng0xeeIESN4BBG1GSM25rP4u2vXrhmqar57AGgf12G0x6iDOfLXX39Nb7zxBt12222088470y9+8Qu+b7du3XhUxAiWC6LKYjRHG3Kf+fPn0zXXXEMVFRXuKIr+49lOPfVUeuCBB/g89B/9wD0++eQTHhEfeeQRuvzyy3kfNozyGAFldJwxYwa99NJL1KNHD/7ce++9W0wpZJQvLy/n/WvXrqWzzjqLR3ppD/3GCH3hhRdSLBbjERzrEgrwbrAfmhDujb+xD/0bN26cq03IvdH/Qw89lDUOAFoJRm3cb9GiRawh3X777dwPaDtdunTh66DZAPg3hWYDje6DDz7gfRjtR44cyW1Ao0DbTz75JM2ePZv7k286ssPBrxoAYI5eQFNTk9W7d29m/QceeKDF+ddddx0fg9YgyPfuZIQ65phj+LqLLroo496nnHKKFQ6HrZNPPpn3YYQZOnQon/voo49mtGFCRtE77riDz91jjz2s3Xbbjf9+6qmn3Ovk2j/+8Y/uaDZt2jQe5QU1NTXW7373Oz4H+PTTT1kzCQQC1hdffMH7cBzXhkIh68knn+R9jY2NLZ5dvu+///58vozg9957r/t8wLHHHsv7I5EIf1511VUZmgaeb9y4cdwHjOy4b//+/a1NmzbxPXAcG/69xo8fz23069fPeuGFFzL6s3HjRtba5NmAM888k8+fPXu2u+/UU0/lffi3uOaaa/idCJYvX25dcMEF1ttvv+3+u3Um+J4A8KPDDwk/PKiJvXr14h/DnXfeyfvwo5Uf7rclgFmzZmUcP//883n/aaedxt9xn2HDhuUkAFOdx34RNAjYtddey38ff/zxfC4EBOfV19ezSg5hmjx5sttfPDOe3QSOff75564avGXLFuull15iAcT199xzj3utqOre64EDDjiArx8zZgyTQJcuXazFixfzsTlz5vCxbt26WQMGDOC/r776apdUAEwvcL/KykompBEjRvB5Tz/9NB/HMwHPP/+8SySvvvqq27ds/ybyHoUA5N/iP//5j1VWVtbi3wfvz0u+nXGg9HUcAFRJqLfYoJqKegdATRRXXD533NZA2ly8eDHNnTuXt4svvpjuueceVv9PP/30Vt2QXhfe+++/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" alt="TL BLACK MAGIC">
-      <span class="hero-badge">馃啌 瀹屽叏鍏嶈垂 路 鏈湴杩愯</span>
-    <h1>AI 闊充箰鍒嗙<br>涓€閿彁鍙栦汉澹颁笌浼村</h1>
-    <p>鍏嶈垂銆佺绾裤€佹棤闇€鏄惧崱 鈥?鎶婁换鎰忔瓕鏇叉媶鎴愪汉澹般€侀紦銆佽礉鏂€佷即濂忓洓鏉＄嫭绔嬮煶杞?/p>
+      <span class="hero-badge">🆓 完全免费 · 本地运行</span>
+    <h1>AI 音乐分离<br>一键提取人声与伴奏</h1>
+    <p>免费、离线、无需显卡 — 把任意歌曲拆成人声、鼓、贝斯、伴奏四条独立音轨</p>
     <a href="#" class="btn-primary" onclick="showDownloadModal();return false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      鍏嶈垂涓嬭浇
+      免费下载
     </a>
   </div>
 </section>
@@ -457,29 +458,29 @@ section { padding: 100px 0; }
 <!-- Features -->
 <section class="features" id="features">
   <div class="container text-center">
-    <span class="section-label reveal">鏍稿績鑳藉姏</span>
-    <h2 class="section-title reveal">鍥涙潯鐙珛闊宠建锛岀簿鍑嗗垎绂?/h2>
-    <p class="section-desc reveal">鍩轰簬 HTDemucs 娣卞害瀛︿範妯″瀷锛屽皢浠讳綍姝屾洸鎷嗗垎涓洪珮璐ㄩ噺鐙珛闊宠建</p>
+    <span class="section-label reveal">核心能力</span>
+    <h2 class="section-title reveal">四条独立音轨，精准分离</h2>
+    <p class="section-desc reveal">基于 HTDemucs 深度学习模型，将任何歌曲拆分为高质量独立音轨</p>
     <div class="features-grid">
       <div class="feature-card reveal">
-        <span class="feature-icon">馃帳</span>
-        <h3>浜哄０鎻愬彇</h3>
-        <p>AI 绮惧噯鍒嗙涓诲敱浜哄０锛屼繚鐣欏懠鍚稿拰缁嗚妭</p>
+        <span class="feature-icon">🎤</span>
+        <h3>人声提取</h3>
+        <p>AI 精准分离主唱人声，保留呼吸和细节</p>
       </div>
       <div class="feature-card reveal">
-        <span class="feature-icon">馃</span>
-        <h3>榧撶粍鎻愬彇</h3>
-        <p>鐙珛鎻愬彇搴曢紦銆佸啗榧撱€侀暡鐗囩瓑鎵撳嚮涔?/p>
+        <span class="feature-icon">🥁</span>
+        <h3>鼓组提取</h3>
+        <p>独立提取底鼓、军鼓、镲片等打击乐</p>
       </div>
       <div class="feature-card reveal">
-        <span class="feature-icon">馃幐</span>
-        <h3>璐濇柉鎻愬彇</h3>
-        <p>鑾峰彇浣庨寰嬪姩绾挎潯锛岃妭濂忔竻鏅板垎鏄?/p>
+        <span class="feature-icon">🎸</span>
+        <h3>贝斯提取</h3>
+        <p>获取低频律动线条，节奏清晰分明</p>
       </div>
       <div class="feature-card reveal">
-        <span class="feature-icon">馃幑</span>
-        <h3>浼村鎻愬彇</h3>
-        <p>鍓╀綑鎵€鏈変箰鍣ㄥ悎鎴愪负绾噣浼村</p>
+        <span class="feature-icon">🎹</span>
+        <h3>伴奏提取</h3>
+        <p>剩余所有乐器合成为纯净伴奏</p>
       </div>
     </div>
   </div>
@@ -497,40 +498,40 @@ section { padding: 100px 0; }
         </div>
         <div class="mockup-body">
           <div class="mock-wave" id="mockWave"></div>
-          <span class="mock-label">TL鍏嶈垂骞插０ </span>
-          <a href="#" class="mock-btn" onclick="showDownloadModal();return false">涓嬭浇杞欢</a>
+          <span class="mock-label">TL免费干声 </span>
+          <a href="#" class="mock-btn" onclick="showDownloadModal();return false">下载软件</a>
         </div>
       </div>
       <div class="reveal">
-        <span class="section-label">涓轰粈涔堥€夋嫨 TL鍏嶈垂骞插０</span>
-        <h2 class="section-title">绠€鍗曞埌涓嶉渶瑕佽鏄庝功</h2>
+        <span class="section-label">为什么选择 TL免费干声</span>
+        <h2 class="section-title">简单到不需要说明书</h2>
         <ul class="highlights-list">
           <li>
-            <div class="hl-icon">馃殌</div>
+            <div class="hl-icon">🚀</div>
             <div class="hl-text">
-              <h4>鏈湴杩愯锛屾棤闇€鑱旂綉</h4>
-              <p>鎵€鏈夊鐞嗗湪鏈湴瀹屾垚锛屼笉涓婁紶銆佷笉绛夊緟锛屼繚鎶や綘鐨勯殣绉?/p>
+              <h4>本地运行，无需联网</h4>
+              <p>所有处理在本地完成，不上传、不等待，保护你的隐私</p>
             </div>
           </li>
           <li>
-            <div class="hl-icon">馃捇</div>
+            <div class="hl-icon">💻</div>
             <div class="hl-text">
-              <h4>CPU 鍗冲彲锛屼笉鎸戠‖浠?/h4>
-              <p>鍩轰簬 HTDemucs 浼樺寲锛屾櫘閫?CPU 鍗冲彲杩愯锛屾棤闇€鐙樉</p>
+              <h4>CPU 即可，不挑硬件</h4>
+              <p>基于 HTDemucs 优化，普通 CPU 即可运行，无需独显</p>
             </div>
           </li>
           <li>
-            <div class="hl-icon">馃摝</div>
+            <div class="hl-icon">📦</div>
             <div class="hl-text">
-              <h4>涓€閿畨瑁咃紝寮€绠卞嵆鐢?/h4>
-              <p>涓嬭浇瑙ｅ帇鍗崇敤锛屾棤闇€閰嶇疆 Python 鐜鎴栦緷璧?/p>
+              <h4>一键安装，开箱即用</h4>
+              <p>下载解压即用，无需配置 Python 环境或依赖</p>
             </div>
           </li>
           <li>
-            <div class="hl-icon">馃幍</div>
+            <div class="hl-icon">🎵</div>
             <div class="hl-text">
-              <h4>鏀寔甯歌鏍煎紡</h4>
-              <p>杈撳叆 MP3 / WAV / FLAC锛岃緭鍑洪珮璐ㄩ噺鐙珛闊宠建</p>
+              <h4>支持常见格式</h4>
+              <p>输入 MP3 / WAV / FLAC，输出高质量独立音轨</p>
             </div>
           </li>
         </ul>
@@ -542,29 +543,29 @@ section { padding: 100px 0; }
 <!-- Tech Specs -->
 <section class="tech-specs" id="tech">
   <div class="container text-center">
-    <span class="section-label reveal">鎶€鏈鏍?/span>
-    <h2 class="section-title reveal">鎶€鏈嚎涓庢牸寮忔敮鎸?/h2>
-    <p class="section-desc reveal">鍩轰簬涓氱晫棰嗗厛鐨?AI 妯″瀷锛屾彁渚涢珮璐ㄩ噺闊抽鍒嗙</p>
+    <span class="section-label reveal">技术规格</span>
+    <h2 class="section-title reveal">技术线与格式支持</h2>
+    <p class="section-desc reveal">基于业界领先的 AI 模型，提供高质量音频分离</p>
     <div class="tech-tags reveal">
       <span class="tech-tag accent">HTDemucs v4.1</span>
       <span class="tech-tag accent">PyTorch</span>
       <span class="tech-tag accent">FFmpeg</span>
-      <span class="tech-tag">MP3 杈撳叆</span>
-      <span class="tech-tag">WAV 杈撳叆</span>
-      <span class="tech-tag">MP3 杈撳叆</span>
-      <span class="tech-tag">WAV 杈撳嚭</span>
+      <span class="tech-tag">MP3 输入</span>
+      <span class="tech-tag">WAV 输入</span>
+      <span class="tech-tag">MP3 输入</span>
+      <span class="tech-tag">WAV 输出</span>
     </div>
     <div class="tech-grid reveal">
       <div class="tech-item">
-        <h4>妯″瀷鐗堟湰</h4>
+        <h4>模型版本</h4>
         <p>HTDemucs v4.1</p>
       </div>
       <div class="tech-item">
-        <h4>杈撳嚭闊宠建</h4>
-        <p>4 鏉＄嫭绔嬭建閬?/p>
+        <h4>输出音轨</h4>
+        <p>4 条独立轨道</p>
       </div>
       <div class="tech-item">
-        <h4>骞冲彴鏀寔</h4>
+        <h4>平台支持</h4>
         <p>Windows</p>
       </div>
     </div>
@@ -574,16 +575,16 @@ section { padding: 100px 0; }
 <!-- CTA Bottom -->
 <section class="cta-bottom">
   <div class="container reveal">
-    <h2>绔嬪嵆涓嬭浇锛屽厤璐逛娇鐢?/h2>
-    <p class="cta-desc">瀹屽叏鍏嶈垂锛屾棤闇€娉ㄥ唽锛屽嵆鍒诲紑濮嬩綘鐨勯煶涔愬垎绂讳箣鏃?/p>
+    <h2>立即下载，免费使用</h2>
+    <p class="cta-desc">完全免费，无需注册，即刻开始你的音乐分离之旅</p>
     <a href="#" class="btn-primary" onclick="showDownloadModal();return false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      绔嬪嵆涓嬭浇 TL鍏嶈垂骞插０
+      立即下载 TL免费干声
     </a>
     <div class="badge-row">
       <span class="badge">v2.1</span>
       <span class="badge">Windows</span>
-      <span class="badge">鍏嶈垂</span>
+      <span class="badge">免费</span>
     </div>
   </div>
 </section>
@@ -592,40 +593,36 @@ section { padding: 100px 0; }
 <div class="modal-overlay" id="downloadModal">
   <div class="modal-dialog">
     <button class="modal-close" onclick="hideDownloadModal()">&times;</button>
-    <div class="modal-title">馃摜 閫夋嫨涓嬭浇鏂瑰紡</div>
-    <div class="modal-subtitle">TL鍏嶈垂骞插０ v2.1 路 Windows/瀹夊崜 瀹夎鍖?/div>
+    <div class="modal-title">📥 选择下载方式</div>
+    <div class="modal-subtitle">TL免费干声 v2.1 · Windows/安卓 安装包</div>
     <div class="download-options">
-      <a href="https://pan.baidu.com/s/1uRo1HHXd-10GtbbQ50Ez6w?pwd=TL26" target="_blank" class="download-option">
-        <div class="dl-icon" style="background:linear-gradient(135deg,#D4A800,#B89400)"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><polyline points="12 12 12 19"/><polyline points="9 16 12 19 15 16"/></svg></div>
+      <a href="https://pan.baidu.com/s/5_sN_C1WK8djj3G6QOjS-cg" target="_blank" class="download-option">
+        <div class="dl-icon" style="background:linear-gradient(135deg,#3385ff,#2468e0)"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><polyline points="12 12 12 19"/><polyline points="9 16 12 19 15 16"/></svg></div>
         <div class="dl-info">
-          <div class="dl-name">鐧惧害缃戠洏</div>
-          <div class="dl-code">鎻愬彇鐮? TL26</div>
+          <div class="dl-name">百度网盘</div>
         </div>
-        <span class="dl-arrow">鈫?/span>
+        <span class="dl-arrow"></span>
       </a>
       <a href="https://pan.quark.cn/s/402f89d504c8" target="_blank" class="download-option">
-        <div class="dl-icon" style="background:linear-gradient(135deg,#D4A800,#B89400)"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="2" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="22" y2="12"/></svg></div>
+        <div class="dl-icon" style="background:linear-gradient(135deg,#1677ff,#0958d9)"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="2" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="22" y2="12"/></svg></div>
         <div class="dl-info">
-          <div class="dl-name">澶稿厠缃戠洏</div>
-          <div class="dl-code">鏃犻渶鎻愬彇鐮?/div>
+          <div class="dl-name">夸克网盘</div>
         </div>
-        <span class="dl-arrow">鈫?/span>
+        <span class="dl-arrow"></span>
       </a>
       <a href="https://pan.xunlei.com/s/VOzH6oVKNqtOqzD_9YNXGRtJA1?pwd=6739#" target="_blank" class="download-option">
         <div class="dl-icon" style="background:linear-gradient(135deg,#1a1a2e,#16213e)"><svg viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
         <div class="dl-info">
-          <div class="dl-name">杩呴浄缃戠洏</div>
-          <div class="dl-code">鎻愬彇鐮? 6739</div>
+          <div class="dl-name">迅雷网盘</div>
         </div>
-        <span class="dl-arrow">鈫?/span>
+        <span class="dl-arrow"></span>
       </a>
       <a href="https://share.fnnas.net/s/e1f14cd32c474451ae" target="_blank" class="download-option">
         <div class="dl-icon" style="background:linear-gradient(135deg,#2ea043,#218838)"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="6" rx="1"/><rect x="2" y="11" width="20" height="6" rx="1"/><rect x="2" y="19" width="20" height="3" rx="1"/><circle cx="6" cy="6" r="1" fill="white"/><circle cx="6" cy="14" r="1" fill="white"/></svg></div>
         <div class="dl-info">
-          <div class="dl-name">椋炵墰 NAS</div>
-          <div class="dl-code">鏃犻渶鎻愬彇鐮?/div>
+          <div class="dl-name">飞牛 NAS</div>
         </div>
-        <span class="dl-arrow">鈫?/span>
+        <span class="dl-arrow"></span>
       </a>
     </div>
   </div>
@@ -634,11 +631,11 @@ section { padding: 100px 0; }
 <!-- Footer -->
 <footer class="footer">
   <div class="container">
-    <p>TL 宸ヤ綔瀹?&copy; 2026鐗堟潈鎵€鏈?/p>
+    <p>TL 工作室 &copy; 2026版权所有</p>
     <div class="footer-links">
-      <a href="#features">鍔熻兘</a>
-      <a href="#highlights">涓嬭浇</a>
-      <a href="#tech">鎶€鏈?/a>
+      <a href="#features">功能</a>
+      <a href="#highlights">下载</a>
+      <a href="#tech">技术</a>
     </div>
   </div>
 </footer>
@@ -694,7 +691,7 @@ document.getElementById('downloadModal').addEventListener('click', function(e) {
   const ctx = canvas.getContext('2d');
   let W, H, particles = [];
   const PARTICLE_COUNT = 60;
-  const COLORS = ['rgba(200,160,0,0.18)', 'rgba(130,80,223,0.12)', 'rgba(191,57,137,0.10)', 'rgba(46,160,67,0.10)'];
+  const COLORS = ['rgba(0,102,204,0.18)', 'rgba(130,80,223,0.12)', 'rgba(191,57,137,0.10)', 'rgba(46,160,67,0.10)'];
 
   function resize() {
     W = canvas.width = canvas.offsetWidth;
@@ -734,7 +731,7 @@ document.getElementById('downloadModal').addEventListener('click', function(e) {
 
   function drawLines() {
     ctx.globalAlpha = 0.04;
-    ctx.strokeStyle = '#C8A000';
+    ctx.strokeStyle = '#0066cc';
     ctx.lineWidth = 0.5;
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
