@@ -1,0 +1,6 @@
+# Sitemap
+# 列出站点所有页面，供搜索引擎抓取
+User-agent: *
+Allow: /
+
+Sitemap: https://tlstudio.cn/sitemap.xml
