@@ -626,9 +626,11 @@ function caesar(text, shift) {
       out += String.fromCharCode((c - 65 + shift) % 26 + 65);
     } else if (c >= 97 && c <= 122) {
       out += String.fromCharCode((c - 97 + shift) % 26 + 97);
-    } else {
+    } else if (c === 32 || (c >= 48 && c <= 57) || (c >= 0x4e00 && c <= 0x9fa5)) {
+      // 空格、数字、中文：保留原样（不加密）
       out += text[i];
     }
+    // 其余符号（标点、特殊字符等）：去掉
   }
   return out;
 }
