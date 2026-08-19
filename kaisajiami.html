@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TL专用加密 - 我们的专属文字加密工具</title>
-<meta name="description" content="TL专用加密，我们的专属加密工具，偏移量固定46，一键加密解密，本地运行不联网，安全可靠。">
+<meta name="description" content="TL专用加密，我们的专属加密工具，偏移量固定8，一键加密解密，本地运行不联网，安全可靠。">
 <meta name="keywords" content="TL专用加密,文字加密,加密工具,解密工具,TL专用加密,tlstudio">
 <meta name="robots" content="index, follow">
 <style>
@@ -403,7 +403,7 @@ section { padding: 100px 0; }
     </div>
     <span class="hero-badge">🔐 我们的专用加密 · 完全免费</span>
     <h1>TL专用加密<br>我们的专属加密</h1>
-    <p>免费、离线、无需联网 — 固定偏移46，一键加密解密，保护你的文字内容，本地运行不泄露</p>
+    <p>免费、离线、无需联网 — 固定偏移8，一键加密解密，保护你的文字内容，本地运行不泄露</p>
     <a href="#cipher" class="btn-primary">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
       立即开始加密
@@ -417,14 +417,14 @@ section { padding: 100px 0; }
     <div class="text-center">
       <span class="section-label reveal">在线工具</span>
       <h2 class="section-title reveal">TL专用加密加解密</h2>
-      <p class="section-desc reveal">输入文字，一键加密或解密（我们的专用偏移46）</p>
+      <p class="section-desc reveal">输入文字，一键加密或解密（我们的专用偏移8）</p>
     </div>
     <div class="cipher-wrap reveal">
       <div class="cipher-head">
         <div class="cipher-title">🔐 加密 / 解密</div>
         <div class="shift-box">
           <label>我们的专用偏移</label>
-          <span class="shift-input" style="display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent)">46</span>
+          <span class="shift-input" style="display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent)">8</span>
         </div>
       </div>
 
@@ -470,7 +470,7 @@ section { padding: 100px 0; }
       </div>
       <div class="feature-card reveal">
         <span class="feature-icon">🎚️</span>
-        <h3>固定偏移 46</h3>
+        <h3>固定偏移 8</h3>
         <p>我们专用的加密偏移量，已锁定不可改</p>
       </div>
       <div class="feature-card reveal">
@@ -525,7 +525,7 @@ section { padding: 100px 0; }
           <div class="cipher-title" style="margin-bottom:20px">📋 我们的加密规则</div>
           <div class="field" style="margin:0">
             <label class="field-label">明文 A B C D E …</label>
-            <div class="cipher-textarea" style="min-height:80px; background:#fff; font-size:0.85rem">A → U（偏移46，46%26=20）<br>B → V<br>C → W<br>… 专用偏移量 46，以此类推</div>
+            <div class="cipher-textarea" style="min-height:80px; background:#fff; font-size:0.85rem">A → I（偏移8，8%26=8）<br>B → J<br>C → K<br>… 专用偏移量 8，以此类推</div>
           </div>
         </div>
       </div>
@@ -541,7 +541,7 @@ section { padding: 100px 0; }
     <p class="section-desc reveal">无需安装任何环境，浏览器打开即用</p>
     <div class="tech-tags reveal">
       <span class="tech-tag accent">纯本地运行</span>
-      <span class="tech-tag accent">固定偏移 46</span>
+      <span class="tech-tag accent">固定偏移 8</span>
       <span class="tech-tag accent">实时加解密</span>
       <span class="tech-tag">响应式设计</span>
       <span class="tech-tag">数据不离开浏览器</span>
@@ -554,7 +554,7 @@ section { padding: 100px 0; }
       </div>
       <div class="tech-item">
         <h4>偏移量</h4>
-        <p>固定 46</p>
+        <p>固定 8</p>
       </div>
       <div class="tech-item">
         <h4>运行方式</h4>
@@ -614,7 +614,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 /* ========== Caesar Cipher Logic ========== */
 function clampShift() {
-  return 46;
+  return 8;
 }
 
 function caesar(text, shift) {
