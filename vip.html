@@ -594,32 +594,24 @@ section { padding: 100px 0; }
 <div class="modal-overlay" id="downloadModal">
   <div class="modal-dialog">
     <button class="modal-close" onclick="hideDownloadModal()">&times;</button>
-    <div class="modal-title">📥 选择下载方式</div>
-    <div class="modal-subtitle">TL干声分离器 v2.1 · Windows安装包</div>
-    <div class="download-options">
-      <a href="https://pan.baidu.com/s/1iflqlkNda4lvNasPqhfFGQ" target="_blank" class="download-option">
-        <div class="dl-icon" style="background:linear-gradient(135deg,#D4A800,#B89400)"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><polyline points="12 12 12 19"/><polyline points="9 16 12 19 15 16"/></svg></div>
-        <div class="dl-info">
-          <div class="dl-name">百度网盘</div>
-        </div>
-      </a>
-      <a href="https://pan.quark.cn/s/0385e8b2d8d3"target="_blank" class="download-option">
-        <div class="dl-icon" style="background:linear-gradient(135deg,#D4A800,#B89400)"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="2" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="22" y2="12"/></svg></div>
-        <div class="dl-info">
-          <div class="dl-name">夸克网盘</div>
-        </div>
-      </a>
-      <a href="https://pan.xunlei.com/s/VOzKk5vhJqUJq9g8NGt29PO_A1#" target="_blank" class="download-option">
-        <div class="dl-icon" style="background:linear-gradient(135deg,#1a1a2e,#16213e)"><svg viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-        <div class="dl-info">
-          <div class="dl-name">迅雷网盘</div>
-        </div>
-      </a>
+    <div class="modal-title">🎫 VIP 激活</div>
+    <div class="modal-subtitle">输入激活密码，验证后解锁完整功能</div>
+    <div style="padding:22px;border:1.5px dashed var(--accent);border-radius:16px;background:rgba(255,255,255,0.6);">
+      <div style="font-size:0.78rem;color:var(--text-secondary);letter-spacing:1px;text-align:center;">你的序列号</div>
+      <div id="serialCode" style="font-size:1.3rem;font-weight:800;letter-spacing:1.5px;color:var(--accent);font-family:'Consolas','Courier New',monospace;text-align:center;margin-top:6px;">----------</div>
+      <div style="font-size:0.78rem;color:var(--text-secondary);letter-spacing:1px;margin-top:18px;">激活密码</div>
+      <input id="passwordInput" type="text" placeholder="请输入激活密码" autocomplete="off" style="width:100%;margin-top:6px;padding:12px 14px;border:1px solid var(--border);border-radius:10px;font-size:1rem;font-family:'Consolas','Courier New',monospace;letter-spacing:1px;text-align:center;outline:none;" onkeydown="if(event.key==='Enter')verifyActivation()">
+      <div id="verifyResult" style="text-align:center;margin-top:10px;font-size:0.88rem;font-weight:600;min-height:1.3em;"></div>
+      <button onclick="verifyActivation()" style="width:100%;margin-top:12px;padding:13px;border-radius:10px;border:none;background:linear-gradient(135deg,#D4A000,#C8A000);color:#fff;font-size:0.95rem;font-weight:600;cursor:pointer;">🔓 验证激活</button>
     </div>
-    <div style="margin-top:20px;text-align:center;">
-      <a href="https://www.goofish.com/item?id=1071137743119&spm=widle.12011849.copy.detail&ut_sk=1.aWIeRq4zdzADAEdtx+HMEybl_12431167_1785997974943.copy.detail.1071137743119.2219053977238" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:12px;background:linear-gradient(135deg,#ff6a00,#ff8c00);color:#fff;font-size:0.95rem;font-weight:600;text-decoration:none;box-shadow:0 4px 16px rgba(255,106,0,0.25);transition:all 0.25s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(255,106,0,0.3)';" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(255,106,0,0.25)';">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        立即前往闲鱼购买下载码
+    <div style="margin-top:20px;text-align:center;padding:16px;border-radius:14px;background:rgba(200,160,0,0.06);border:1px solid rgba(200,160,0,0.15);">
+      <div style="font-size:0.85rem;color:var(--text-secondary);">没有激活密码？</div>
+      <div style="font-size:1rem;font-weight:700;color:var(--text);margin-top:6px;">请联系微信：<span style="color:var(--accent);">【请填写你的微信号】</span></div>
+    </div>
+    <div style="margin-top:16px;">
+      <a href="https://github.com/tlstudio-zhuanye/tlstudio-site/releases/download/v2.1-vip/TL._Setup_vip.exe" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:15px;border-radius:12px;background:linear-gradient(135deg,#D4A000,#C8A000);color:#fff;font-size:1rem;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(200,160,0,0.25);transition:all 0.25s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(200,160,0,0.3)';" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(200,160,0,0.25)';">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        立即下载 TL干声分离器 VIP
       </a>
     </div>
   </div>
@@ -668,6 +660,58 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     wave.appendChild(bar);
   }
 })();
+
+/* ========== VIP 激活（客户端） ========== */
+const CAESAR_SHIFT = 46;                 // 凯撒偏移量
+const SERIAL_KEY = '__tl_cache_cfg';      // 序列号本地存储键
+
+function randomString(len, charset) {
+  const arr = new Uint32Array(len);
+  crypto.getRandomValues(arr);
+  let out = '';
+  for (let i = 0; i < len; i++) out += charset[arr[i] % charset.length];
+  return out;
+}
+
+function randomSerial() {
+  const alnum = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const g = () => randomString(4, alnum);
+  return 'TL-' + g() + '-' + g() + '-' + g();
+}
+
+// 密码 = 序列号去除非字母字符后的凯撒加密（偏移 46）
+function caesarSerial(serial, shift) {
+  return serial.replace(/[^A-Za-z]/g, '').toUpperCase().split('').map(c =>
+    String.fromCharCode((c.charCodeAt(0) - 65 + shift) % 26 + 65)
+  ).join('');
+}
+
+function loadSerial() {
+  let serial = null;
+  try { serial = localStorage.getItem(SERIAL_KEY); } catch (e) {}
+  if (!serial) {
+    serial = randomSerial();
+    try { localStorage.setItem(SERIAL_KEY, serial); } catch (e) {}
+  }
+  return serial;
+}
+
+function verifyActivation() {
+  const serial = document.getElementById('serialCode').textContent;
+  const input = document.getElementById('passwordInput').value.trim().toUpperCase();
+  const expected = caesarSerial(serial, CAESAR_SHIFT);
+  const result = document.getElementById('verifyResult');
+  if (input === expected) {
+    result.textContent = '✅ 激活成功，感谢支持！';
+    result.style.color = 'var(--success)';
+  } else {
+    result.textContent = '❌ 密码错误，请检查后重试';
+    result.style.color = 'var(--error)';
+  }
+}
+
+// 页面加载时生成 / 读取序列号
+document.getElementById('serialCode').textContent = loadSerial();
 
 /* ========== Download Modal ========== */
 function showDownloadModal() {
