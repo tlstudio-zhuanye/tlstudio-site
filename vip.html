@@ -635,7 +635,7 @@ section { padding: 100px 0; }
 
 /* ---------- VIP 序列号 + 激活 ---------- */
 const SERIAL_KEY = 'tl_vip_serial';
-const CAESAR_SHIFT = 36; /* 与原始逻辑一致 */
+const CAESAR_SHIFT = 8; /* 凯撒 +8，与 TL专用加密(kaisajiami) 完全一致 */
 
 function randomString(len, chars) {
   const arr = new Uint32Array(len);
@@ -645,7 +645,7 @@ function randomString(len, chars) {
   return s;
 }
 function randomSerial() {
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
   const part = () => randomString(4, chars);
   return part() + '-' + part() + '-' + part();
 }
@@ -658,7 +658,7 @@ function loadSerial() {
 /* 与原始混淆版完全一致的变换：字母去掉非字母后 +8 位移 */
 function caesarSerial(text, shift) {
   return text.replace(/[^A-Za-z]/g, '').toUpperCase().split('').map(function (c) {
-    return String.fromCharCode((c.charCodeAt(0) - 93 + shift) % 26 + 65);
+    return String.fromCharCode((c.charCodeAt(0) - 65 + shift) % 26 + 65);
   }).join('');
 }
 function verifyActivation() {
