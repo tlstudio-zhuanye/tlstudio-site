@@ -424,7 +424,7 @@ section { padding: 100px 0; }
         <div class="cipher-title">🔐 加密 / 解密</div>
         <div class="shift-box">
           <label for="shiftInput">偏移量</label>
-          <input class="shift-input" id="shiftInput" type="number" value="3" min="0" max="100" oninput="clampShift()">
+          <input class="shift-input" id="shiftInput" type="number" value="46" min="46" max="46" readonly>
         </div>
       </div>
 
@@ -470,8 +470,8 @@ section { padding: 100px 0; }
       </div>
       <div class="feature-card reveal">
         <span class="feature-icon">🎚️</span>
-        <h3>偏移量可调</h3>
-        <p>0-100 任意偏移，自由设置加密强度</p>
+        <h3>固定偏移 46</h3>
+        <p>我们专用的加密偏移量，已锁定不可改</p>
       </div>
       <div class="feature-card reveal">
         <span class="feature-icon">💾</span>
@@ -525,7 +525,7 @@ section { padding: 100px 0; }
           <div class="cipher-title" style="margin-bottom:20px">📋 字母位移规则</div>
           <div class="field" style="margin:0">
             <label class="field-label">明文 A B C D E …</label>
-            <div class="cipher-textarea" style="min-height:80px; background:#fff; font-size:0.85rem">A → D（偏移3）<br>B → E<br>C → F<br>…以此类推，循环回绕</div>
+            <div class="cipher-textarea" style="min-height:80px; background:#fff; font-size:0.85rem">A → U（偏移46，46%26=20）<br>B → V<br>C → W<br>… 专用偏移量 46，以此类推</div>
           </div>
         </div>
       </div>
@@ -541,7 +541,7 @@ section { padding: 100px 0; }
     <p class="section-desc reveal">无需安装任何环境，浏览器打开即用</p>
     <div class="tech-tags reveal">
       <span class="tech-tag accent">纯本地运行</span>
-      <span class="tech-tag accent">偏移量 0-100</span>
+      <span class="tech-tag accent">固定偏移 46</span>
       <span class="tech-tag accent">实时加解密</span>
       <span class="tech-tag">响应式设计</span>
       <span class="tech-tag">数据不离开浏览器</span>
@@ -553,8 +553,8 @@ section { padding: 100px 0; }
         <p>凯撒密码</p>
       </div>
       <div class="tech-item">
-        <h4>偏移范围</h4>
-        <p>0 - 100</p>
+        <h4>偏移量</h4>
+        <p>固定 46</p>
       </div>
       <div class="tech-item">
         <h4>运行方式</h4>
@@ -614,13 +614,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 /* ========== Caesar Cipher Logic ========== */
 function clampShift() {
-  const el = document.getElementById('shiftInput');
-  let v = parseInt(el.value, 10);
-  if (isNaN(v)) v = 0;
-  if (v < 0) v = 0;
-  if (v > 100) v = 100;
-  el.value = v;
-  return v;
+  return 46;
 }
 
 function caesar(text, shift) {
