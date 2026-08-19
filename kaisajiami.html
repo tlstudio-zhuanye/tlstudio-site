@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TL凯撒加密 - 凯撒密码在线加密 · 解密工具</title>
+<meta name="description" content="TL凯撒加密，免费的凯撒密码在线工具，支持一键加密、解密、自定义偏移量，本地运行不联网，安全可靠。">
+<meta name="keywords" content="凯撒加密,凯撒密码,在线加密,解密工具,密码工具,TL凯撒加密,tlstudio">
+<meta name="robots" content="index, follow">
+<style>
+/* ========== Reset & Base ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #ffffff;
+  --panel: #f5f5f5;
+  --border: #e0e0e0;
+  --text: #1a1a1a;
+  --text-secondary: #888888;
+  --accent: #0066cc;
+  --accent-hover: #0052a3;
+  --success: #2ea043;
+  --error: #cf222e;
+  --purple: #8250df;
+  --pink: #bf3989;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+/* ========== Navigation ========== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(224,224,224,0.6);
+  transition: box-shadow 0.3s;
+}
+.nav.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
+.nav-inner {
+  max-width: 1120px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px; padding: 0 24px;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 700; font-size: 1.05rem; color: var(--text);
+}
+.nav-logo {
+  width: 30px; height: 30px; background: var(--accent);
+  border-radius: 7px; display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.5px;
+}
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+  font-size: 0.9rem; color: var(--text-secondary);
+  transition: color 0.2s; position: relative;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--text); border-radius: 1px;
+  transition: all 0.3s;
+}
+
+/* ========== Hero ========== */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; overflow: hidden;
+  background: linear-gradient(170deg, #f0f6ff 0%, #ffffff 40%, #f8f0ff 70%, #fff 100%);
+}
+#heroCanvas {
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+}
+.hero-content {
+  position: relative; z-index: 1;
+  max-width: 760px; padding: 120px 24px 80px;
+  opacity: 0; transform: translateY(32px);
+  animation: heroFadeIn 1s ease 0.3s forwards;
+}
+.hero-mask {
+  width: 72px; height: 72px; margin: 0 auto 20px;
+  filter: drop-shadow(0 4px 12px rgba(0,102,204,0.25));
+  animation: maskPulse 3s ease-in-out infinite;
+}
+@keyframes maskPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+@keyframes heroFadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-badge {
+  display: inline-block;
+  padding: 5px 14px; border-radius: 20px;
+  background: rgba(0,102,204,0.08); color: var(--accent);
+  font-size: 0.8rem; font-weight: 600; margin-bottom: 24px;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800; line-height: 1.2;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero p {
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  color: var(--text-secondary); margin-bottom: 40px;
+  max-width: 600px; margin-left: auto; margin-right: auto;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 40px; border-radius: 12px;
+  background: var(--accent); color: #fff;
+  font-size: 1.05rem; font-weight: 600;
+  border: none; cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 4px 16px rgba(0,102,204,0.25);
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,102,204,0.3);
+}
+.btn-primary:active { transform: translateY(0); }
+.btn-primary svg { width: 18px; height: 18px; }
+
+/* ========== Section Common ========== */
+section { padding: 100px 0; }
+.section-label {
+  display: inline-block; font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--accent); margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 800; margin-bottom: 16px;
+}
+.section-desc {
+  font-size: 1.05rem; color: var(--text-secondary);
+  max-width: 560px; margin: 0 auto 56px;
+}
+.text-center { text-align: center; }
+
+/* ========== Cipher Tool ========== */
+.cipher { background: var(--bg); }
+.cipher-wrap {
+  max-width: 860px; margin: 0 auto;
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 20px; padding: 36px 32px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+}
+.cipher-head {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px; margin-bottom: 24px;
+}
+.cipher-title {
+  font-size: 1.4rem; font-weight: 800; display: flex; align-items: center; gap: 10px;
+}
+.shift-box {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 12px; padding: 8px 14px;
+}
+.shift-box label { font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; }
+.shift-input {
+  width: 64px; padding: 6px 10px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--panel);
+  font-size: 0.95rem; text-align: center; outline: none; transition: border-color 0.2s;
+}
+.shift-input:focus { border-color: var(--accent); }
+
+.field { margin-bottom: 18px; }
+.field-label {
+  display: block; font-size: 0.85rem; font-weight: 600;
+  color: var(--text-secondary); margin-bottom: 8px;
+}
+.cipher-textarea {
+  width: 100%; min-height: 120px; resize: vertical;
+  padding: 16px; border-radius: 12px;
+  border: 1px solid var(--border); background: var(--bg);
+  font-size: 0.95rem; line-height: 1.6; outline: none;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  transition: border-color 0.2s;
+}
+.cipher-textarea:focus { border-color: var(--accent); }
+
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+.tool-btn {
+  padding: 12px 28px; border-radius: 10px; border: 1px solid var(--border);
+  font-size: 0.95rem; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; background: var(--bg); color: var(--text);
+}
+.tool-btn:hover { border-color: var(--accent); color: var(--accent); }
+.tool-btn.encrypt { background: var(--accent); color: #fff; border-color: var(--accent); }
+.tool-btn.encrypt:hover { background: var(--accent-hover); color: #fff; }
+.tool-btn.decrypt { background: var(--purple); color: #fff; border-color: var(--purple); }
+.tool-btn.decrypt:hover { opacity: 0.9; color: #fff; }
+.tool-btn.copy { margin-left: auto; }
+
+.toolbar {
+  display: flex; gap: 10px; justify-content: flex-end; margin-top: 8px; flex-wrap: wrap;
+}
+
+/* ========== Features ========== */
+.features { background: var(--panel); }
+.features-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+}
+.feature-card {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 16px; padding: 36px 28px;
+  text-align: center;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative; overflow: hidden;
+}
+.feature-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: var(--accent);
+  transform: scaleX(0); transition: transform 0.35s;
+}
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+  border-color: rgba(0,102,204,0.2);
+}
+.feature-card:hover::before { transform: scaleX(1); }
+.feature-icon {
+  font-size: 2.6rem; margin-bottom: 18px;
+  display: block;
+}
+.feature-card h3 {
+  font-size: 1.1rem; font-weight: 700; margin-bottom: 10px;
+}
+.feature-card p {
+  font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55;
+}
+
+/* ========== Highlights ========== */
+.highlights { background: var(--bg); }
+.highlights-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  align-items: center;
+}
+.highlights-list { list-style: none; display: flex; flex-direction: column; gap: 24px; }
+.highlights-list li {
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.hl-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+  background: var(--panel); border: 1px solid var(--border);
+}
+.hl-text h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.hl-text p { font-size: 0.88rem; color: var(--text-secondary); }
+
+/* ========== Tech Specs ========== */
+.tech-specs { background: var(--panel); }
+.tech-tags {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  justify-content: center; margin-bottom: 48px;
+}
+.tech-tag {
+  padding: 10px 20px; border-radius: 10px;
+  background: var(--bg); border: 1px solid var(--border);
+  font-size: 0.9rem; font-weight: 600;
+  transition: all 0.25s;
+}
+.tech-tag:hover {
+  border-color: var(--accent); color: var(--accent);
+  transform: translateY(-2px);
+}
+.tech-tag.accent { border-color: var(--accent); color: var(--accent); background: rgba(0,102,204,0.06); }
+.tech-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  max-width: 800px; margin: 0 auto;
+}
+.tech-item {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 12px; padding: 24px; text-align: center;
+}
+.tech-item h4 { font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 8px; }
+.tech-item p { font-size: 1.05rem; font-weight: 700; }
+
+/* ========== CTA Bottom ========== */
+.cta-bottom {
+  background: linear-gradient(170deg, #f0f6ff 0%, #f8f0ff 100%);
+  text-align: center; padding: 100px 0;
+}
+.cta-bottom h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 800; margin-bottom: 12px;
+}
+.cta-bottom .cta-desc {
+  font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 36px;
+}
+.badge-row {
+  display: flex; gap: 10px; justify-content: center; margin-top: 20px;
+}
+.badge {
+  padding: 4px 12px; border-radius: 6px;
+  font-size: 0.75rem; font-weight: 600;
+  background: var(--bg); border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+/* ========== Footer ========== */
+.footer {
+  padding: 40px 0; text-align: center;
+  border-top: 1px solid var(--border);
+}
+.footer p { font-size: 0.85rem; color: var(--text-secondary); }
+.footer-links { display: flex; gap: 24px; justify-content: center; margin-top: 12px; }
+.footer-links a { font-size: 0.82rem; color: var(--text-secondary); transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+
+/* ========== Scroll Animations ========== */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ========== Responsive ========== */
+@media (max-width: 900px) {
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .highlights-row { grid-template-columns: 1fr; gap: 40px; }
+  .tech-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 56px; left: 0; right: 0;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(16px);
+    padding: 16px 24px; gap: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-hamburger { display: flex; }
+  .features-grid { grid-template-columns: 1fr; }
+  .tech-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 2rem; }
+  section { padding: 64px 0; }
+  .btn-row { flex-direction: column; }
+  .tool-btn.copy { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <div class="nav-logo">TL</div>
+      <span>TL凯撒加密</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#cipher">加密工具</a>
+      <a href="#features">功能特色</a>
+      <a href="#tech">关于</a>
+      <a href="https://tlstudio.cn/vip.html">会员入口</a>
+    </div>
+    <div class="nav-hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-mask">
+      <svg viewBox="0 0 24 24" fill="none" stroke="url(#cipherGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%">
+        <defs><linearGradient id="cipherGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0066cc"/><stop offset="100%" stop-color="#8250df"/></linearGradient></defs>
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        <circle cx="12" cy="16" r="1"/>
+      </svg>
+    </div>
+    <span class="hero-badge">🔐 凯撒密码 · 完全免费</span>
+    <h1>凯撒加密<br>文字一键加密解密</h1>
+    <p>免费、离线、无需联网 — 自定义偏移量，一键加密解密，保护你的文字内容，本地运行不泄露</p>
+    <a href="#cipher" class="btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      立即开始加密
+    </a>
+  </div>
+</section>
+
+<!-- Cipher Tool -->
+<section class="cipher" id="cipher">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-label reveal">在线工具</span>
+      <h2 class="section-title reveal">凯撒密码加解密</h2>
+      <p class="section-desc reveal">输入文字，设置偏移量，一键加密或解密</p>
+    </div>
+    <div class="cipher-wrap reveal">
+      <div class="cipher-head">
+        <div class="cipher-title">🔐 加密 / 解密</div>
+        <div class="shift-box">
+          <label for="shiftInput">偏移量</label>
+          <input class="shift-input" id="shiftInput" type="number" value="3" min="0" max="25" oninput="clampShift()">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">输入内容</label>
+        <textarea class="cipher-textarea" id="inputText" placeholder="在这里输入要加密或解密的文字…"></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button class="tool-btn encrypt" onclick="encrypt()">🔒 加密</button>
+        <button class="tool-btn decrypt" onclick="decrypt()">🔓 解密</button>
+      </div>
+
+      <div class="field" style="margin-bottom:8px">
+        <label class="field-label">输出结果</label>
+        <textarea class="cipher-textarea" id="outputText" readonly placeholder="加密 / 解密结果将显示在这里…"></textarea>
+      </div>
+
+      <div class="toolbar">
+        <button class="tool-btn copy" onclick="copyOutput()">📋 复制结果</button>
+        <button class="tool-btn" onclick="clearAll()">清空</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features" id="features">
+  <div class="container text-center">
+    <span class="section-label reveal">核心能力</span>
+    <h2 class="section-title reveal">为文字加密而生</h2>
+    <p class="section-desc reveal">从加密到解密，覆盖凯撒密码的每个环节</p>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <span class="feature-icon">🔒</span>
+        <h3>一键加密</h3>
+        <p>输入文字设偏移量，点一下完成凯撒加密</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">🔓</span>
+        <h3>一键解密</h3>
+        <p>相同偏移量反推，秒还原原始内容</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">🎚️</span>
+        <h3>偏移量可调</h3>
+        <p>0-25 任意偏移，自由设置加密强度</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">💾</span>
+        <h3>本地运行</h3>
+        <p>纯前端处理，内容不上传不泄露</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Highlights -->
+<section class="highlights" id="highlights">
+  <div class="container">
+    <div class="highlights-row">
+      <div class="reveal">
+        <span class="section-label">为什么选择 TL凯撒加密</span>
+        <h2 class="section-title">经典密码，简单好用</h2>
+        <ul class="highlights-list">
+          <li>
+            <div class="hl-icon">🚀</div>
+            <div class="hl-text">
+              <h4>浏览器直开</h4>
+              <p>无需安装任何环境，打开即用</p>
+            </div>
+          </li>
+          <li>
+            <div class="hl-icon">📱</div>
+            <div class="hl-text">
+              <h4>手机电脑都能用</h4>
+              <p>响应式设计，手机端也能轻松加密</p>
+            </div>
+          </li>
+          <li>
+            <div class="hl-icon">🔒</div>
+            <div class="hl-text">
+              <h4>隐私安全</h4>
+              <p>全部在本地计算，文字绝不上传</p>
+            </div>
+          </li>
+          <li>
+            <div class="hl-icon">⚡</div>
+            <div class="hl-text">
+              <h4>实时高效</h4>
+              <p>加密解密瞬时完成，不卡顿</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <div class="cipher-wrap" style="margin:0">
+          <div class="cipher-title" style="margin-bottom:20px">📋 字母位移规则</div>
+          <div class="field" style="margin:0">
+            <label class="field-label">明文 A B C D E …</label>
+            <div class="cipher-textarea" style="min-height:80px; background:#fff; font-size:0.85rem">A → D（偏移3）<br>B → E<br>C → F<br>…以此类推，循环回绕</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tech Specs -->
+<section class="tech-specs" id="tech">
+  <div class="container text-center">
+    <span class="section-label reveal">技术规格</span>
+    <h2 class="section-title reveal">轻量 · 极速 · 稳定</h2>
+    <p class="section-desc reveal">无需安装任何环境，浏览器打开即用</p>
+    <div class="tech-tags reveal">
+      <span class="tech-tag accent">纯本地运行</span>
+      <span class="tech-tag accent">偏移量 0-25</span>
+      <span class="tech-tag accent">实时加解密</span>
+      <span class="tech-tag">响应式设计</span>
+      <span class="tech-tag">数据不离开浏览器</span>
+      <span class="tech-tag">完全免费</span>
+    </div>
+    <div class="tech-grid reveal">
+      <div class="tech-item">
+        <h4>算法类型</h4>
+        <p>凯撒密码</p>
+      </div>
+      <div class="tech-item">
+        <h4>偏移范围</h4>
+        <p>0 - 25</p>
+      </div>
+      <div class="tech-item">
+        <h4>运行方式</h4>
+        <p>浏览器直开</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Bottom -->
+<section class="cta-bottom">
+  <div class="container reveal">
+    <h2>立即加密，保护你的文字</h2>
+    <p class="cta-desc">完全免费，无需注册，即刻开始凯撒加解密</p>
+    <a href="#cipher" class="btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      立即开始加密
+    </a>
+    <div class="badge-row">
+      <span class="badge">v1.0</span>
+      <span class="badge">全平台</span>
+      <span class="badge">免费</span>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>TL 工作室 &copy; 2026版权所有</p>
+    <div class="footer-links">
+      <a href="#cipher">加密工具</a>
+      <a href="#features">功能</a>
+      <a href="#tech">技术</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ========== Nav Scroll Shadow ========== */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+});
+
+/* ========== Mobile Nav Close ========== */
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+/* ========== Scroll Reveal ========== */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ========== Caesar Cipher Logic ========== */
+function clampShift() {
+  const el = document.getElementById('shiftInput');
+  let v = parseInt(el.value, 10);
+  if (isNaN(v)) v = 0;
+  v = ((v % 26) + 26) % 26;
+  el.value = v;
+  return v;
+}
+
+function caesar(text, shift) {
+  shift = ((shift % 26) + 26) % 26;
+  let out = '';
+  for (let i = 0; i < text.length; i++) {
+    const c = text.charCodeAt(i);
+    if (c >= 65 && c <= 90) {
+      out += String.fromCharCode((c - 65 + shift) % 26 + 65);
+    } else if (c >= 97 && c <= 122) {
+      out += String.fromCharCode((c - 97 + shift) % 26 + 97);
+    } else {
+      out += text[i];
+    }
+  }
+  return out;
+}
+
+function encrypt() {
+  const shift = clampShift();
+  const input = document.getElementById('inputText').value;
+  document.getElementById('outputText').value = caesar(input, shift);
+}
+
+function decrypt() {
+  const shift = clampShift();
+  const input = document.getElementById('inputText').value;
+  document.getElementById('outputText').value = caesar(input, -shift);
+}
+
+function copyOutput() {
+  const out = document.getElementById('outputText');
+  if (!out.value) { alert('请先加密或解密生成结果'); return; }
+  out.select();
+  out.setSelectionRange(0, 99999);
+  try {
+    navigator.clipboard.writeText(out.value);
+  } catch(e) {
+    document.execCommand('copy');
+  }
+  const btn = document.querySelector('.tool-btn.copy');
+  const old = btn.innerText;
+  btn.innerText = '✅ 已复制';
+  setTimeout(() => { btn.innerText = old; }, 1500);
+}
+
+function clearAll() {
+  document.getElementById('inputText').value = '';
+  document.getElementById('outputText').value = '';
+}
+
+/* ========== Hero Canvas Particle Animation ========== */
+(function() {
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const PARTICLE_COUNT = 60;
+  const COLORS = ['rgba(0,102,204,0.18)', 'rgba(130,80,223,0.12)', 'rgba(191,57,137,0.10)', 'rgba(46,160,67,0.10)'];
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * W;
+      this.y = Math.random() * H;
+      this.r = Math.random() * 2.5 + 0.8;
+      this.vx = (Math.random() - 0.5) * 0.35;
+      this.vy = (Math.random() - 0.5) * 0.35;
+      this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+      this.opacity = Math.random() * 0.5 + 0.3;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < -10 || this.x > W + 10 || this.y < -10 || this.y > H + 10) this.reset();
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.globalAlpha = this.opacity;
+      ctx.fill();
+    }
+  }
+  function init() {
+    resize();
+    particles = [];
+    for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+  }
+  function drawLines() {
+    ctx.globalAlpha = 0.04;
+    ctx.strokeStyle = '#0066cc';
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 140) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalAlpha = 1;
+    particles.forEach(p => { p.update(); p.draw(); });
+    drawLines();
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(loop);
+  }
+  window.addEventListener('resize', () => { resize(); });
+  init();
+  loop();
+})();
+
+/* ========== Init ========== */
+clampShift();
+</script>
+
+</body>
+</html>
