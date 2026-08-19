@@ -424,7 +424,7 @@ section { padding: 100px 0; }
         <div class="cipher-title">🔐 加密 / 解密</div>
         <div class="shift-box">
           <label for="shiftInput">偏移量</label>
-          <input class="shift-input" id="shiftInput" type="number" value="3" min="0" max="25" oninput="clampShift()">
+          <input class="shift-input" id="shiftInput" type="number" value="3" min="0" max="100" oninput="clampShift()">
         </div>
       </div>
 
@@ -471,7 +471,7 @@ section { padding: 100px 0; }
       <div class="feature-card reveal">
         <span class="feature-icon">🎚️</span>
         <h3>偏移量可调</h3>
-        <p>0-25 任意偏移，自由设置加密强度</p>
+        <p>0-100 任意偏移，自由设置加密强度</p>
       </div>
       <div class="feature-card reveal">
         <span class="feature-icon">💾</span>
@@ -541,7 +541,7 @@ section { padding: 100px 0; }
     <p class="section-desc reveal">无需安装任何环境，浏览器打开即用</p>
     <div class="tech-tags reveal">
       <span class="tech-tag accent">纯本地运行</span>
-      <span class="tech-tag accent">偏移量 0-25</span>
+      <span class="tech-tag accent">偏移量 0-100</span>
       <span class="tech-tag accent">实时加解密</span>
       <span class="tech-tag">响应式设计</span>
       <span class="tech-tag">数据不离开浏览器</span>
@@ -554,7 +554,7 @@ section { padding: 100px 0; }
       </div>
       <div class="tech-item">
         <h4>偏移范围</h4>
-        <p>0 - 25</p>
+        <p>0 - 100</p>
       </div>
       <div class="tech-item">
         <h4>运行方式</h4>
@@ -617,7 +617,8 @@ function clampShift() {
   const el = document.getElementById('shiftInput');
   let v = parseInt(el.value, 10);
   if (isNaN(v)) v = 0;
-  v = ((v % 26) + 26) % 26;
+  if (v < 0) v = 0;
+  if (v > 100) v = 100;
   el.value = v;
   return v;
 }
