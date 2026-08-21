@@ -366,9 +366,108 @@ section { padding: 100px 0; }
   .btn-row { flex-direction: column; }
   .tool-btn.copy { margin-left: 0; }
 }
+/* ========== Admin Gate (Internal Management Login) ========== */
+#adminGate {
+  position: fixed; inset: 0; z-index: 2000;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #0a2540 0%, #0d3b66 45%, #0066cc 100%);
+  font-family: "PingFang SC","Microsoft YaHei",sans-serif;
+}
+#adminGate.hidden { display: none; }
+.admin-card {
+  width: 400px; max-width: 90vw;
+  background: #fff; border-radius: 18px;
+  padding: 40px 36px 34px;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+  animation: adminPop 0.4s ease;
+}
+@keyframes adminPop { from { opacity:0; transform: translateY(16px) scale(0.98);} to {opacity:1; transform:none;} }
+.admin-sys-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.admin-sys-logo {
+  width: 42px; height: 42px; border-radius: 10px;
+  background: linear-gradient(135deg, #0066cc, #8250df);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 800; font-size: 0.95rem;
+}
+.admin-sys-title { font-size: 1.15rem; font-weight: 800; color: #1a1a1a; line-height: 1.2; }
+.admin-sys-sub { font-size: 0.72rem; letter-spacing: 1.5px; color: #0066cc; font-weight: 700; text-transform: uppercase; }
+.admin-card h2 { font-size: 1.05rem; font-weight: 700; margin: 22px 0 4px; color: #1a1a1a; }
+.admin-hint { font-size: 0.82rem; color: #888; margin-bottom: 20px; }
+.admin-field { margin-bottom: 14px; }
+.admin-field label { display:block; font-size: 0.8rem; font-weight: 600; color: #555; margin-bottom: 6px; }
+.admin-field input {
+  width: 100%; padding: 12px 14px; border-radius: 10px;
+  border: 1px solid #e0e0e0; background: #f5f5f5;
+  font-size: 0.95rem; outline: none; transition: border-color 0.2s;
+}
+.admin-field input:focus { border-color: #0066cc; background: #fff; }
+.admin-login-btn {
+  width: 100%; padding: 13px; border: none; border-radius: 10px;
+  background: #0066cc; color: #fff; font-size: 0.98rem; font-weight: 700;
+  cursor: pointer; margin-top: 6px; transition: background 0.2s;
+}
+.admin-login-btn:hover { background: #0052a3; }
+.admin-err {
+  display: none; margin-top: 14px; padding: 10px 12px; border-radius: 8px;
+  background: #fff0f0; color: #cf222e; font-size: 0.82rem; text-align: center;
+  border: 1px solid #ffd5d5;
+}
+.admin-err.show { display: block; }
+.admin-foot {
+  margin-top: 18px; padding-top: 14px; border-top: 1px solid #eee;
+  text-align: center; font-size: 0.72rem; color: #aaa;
+}
+#adminBar {
+  position: fixed; top: 12px; right: 14px; z-index: 1500;
+  display: none; align-items: center; gap: 10px;
+  background: rgba(10,37,64,0.92); color: #fff;
+  padding: 8px 14px; border-radius: 999px; font-size: 0.8rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+#adminBar.show { display: flex; }
+#adminBar .dot { width: 8px; height: 8px; border-radius: 50%; background: #2ea043; }
+#adminBar button {
+  background: rgba(255,255,255,0.15); border: none; color: #fff;
+  padding: 4px 10px; border-radius: 999px; cursor: pointer; font-size: 0.78rem;
+}
+#adminBar button:hover { background: rgba(255,255,255,0.28); }
+
 </style>
 </head>
 <body>
+
+<!-- Admin Gate: 官方内部管理登录 -->
+<div id="adminGate">
+  <div class="admin-card">
+    <div class="admin-sys-head">
+      <div class="admin-sys-logo">TL</div>
+      <div>
+        <div class="admin-sys-title">TL 工作室 · 内部管理系统</div>
+        <div class="admin-sys-sub">Internal Management System</div>
+      </div>
+    </div>
+    <h2>管理员登录</h2>
+    <p class="admin-hint">请输入管理员账号与密码以进入系统</p>
+    <div class="admin-field">
+      <label>管理员账号</label>
+      <input type="text" id="adminUser" placeholder="请输入管理员账号" autocomplete="username">
+    </div>
+    <div class="admin-field">
+      <label>管理员密码</label>
+      <input type="password" id="adminPass" placeholder="请输入管理员密码" autocomplete="current-password">
+    </div>
+    <button class="admin-login-btn" onclick="adminLogin()">登 录</button>
+    <div class="admin-err" id="adminErr">账号或密码错误，请重试</div>
+    <div class="admin-foot">仅供内部授权人员使用 · 未授权禁止访问</div>
+  </div>
+</div>
+
+<!-- Admin status bar -->
+<div id="adminBar">
+  <span class="dot"></span>
+  <span id="adminName">管理员 已登录</span>
+  <button onclick="adminLogout()">退出</button>
+</div>
 
 <!-- Navigation -->
 <nav class="nav" id="nav">
@@ -739,6 +838,44 @@ function clearAll() {
   init();
   loop();
 })();
+
+/* ========== Admin Gate (Internal Management) ========== */
+const ADMIN_USER = 'tlstudio';
+const ADMIN_PASS = 'TL@2026admin';
+
+function adminLogin() {
+  const u = document.getElementById('adminUser').value.trim();
+  const p = document.getElementById('adminPass').value;
+  const err = document.getElementById('adminErr');
+  if (u === ADMIN_USER && p === ADMIN_PASS) {
+    sessionStorage.setItem('tl_admin', '1');
+    document.getElementById('adminGate').classList.add('hidden');
+    document.getElementById('adminBar').classList.add('show');
+    document.getElementById('adminName').textContent = '管理员 ' + u + ' 已登录';
+    err.classList.remove('show');
+  } else {
+    err.classList.add('show');
+  }
+}
+function adminLogout() {
+  sessionStorage.removeItem('tl_admin');
+  document.getElementById('adminBar').classList.remove('show');
+  document.getElementById('adminGate').classList.remove('hidden');
+  document.getElementById('adminUser').value = '';
+  document.getElementById('adminPass').value = '';
+}
+// 回车快捷登录
+window.addEventListener('keydown', function(e){
+  if (e.key === 'Enter' && !document.getElementById('adminGate').classList.contains('hidden')) {
+    adminLogin();
+  }
+});
+// 会话内保持登录状态
+if (sessionStorage.getItem('tl_admin') === '1') {
+  document.getElementById('adminGate').classList.add('hidden');
+  document.getElementById('adminBar').classList.add('show');
+  document.getElementById('adminName').textContent = '管理员 ' + ADMIN_USER + ' 已登录';
+}
 
 /* ========== Init ========== */
 clampShift();
