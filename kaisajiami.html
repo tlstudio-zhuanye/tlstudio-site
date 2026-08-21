@@ -87,10 +87,6 @@ a { text-decoration: none; color: inherit; }
   text-align: center; overflow: hidden;
   background: linear-gradient(170deg, #f0f6ff 0%, #ffffff 40%, #f8f0ff 70%, #fff 100%);
 }
-#heroCanvas {
-  position: absolute; inset: 0; z-index: 0;
-  pointer-events: none;
-}
 .hero-content {
   position: relative; z-index: 1;
   max-width: 760px; padding: 120px 24px 80px;
@@ -465,56 +461,19 @@ section { padding: 100px 0; }
   <button onclick="adminLogout()">退出</button>
 </div>
 
-<!-- Navigation -->
-<nav class="nav" id="nav">
-  <div class="nav-inner">
-    <div class="nav-brand">
-      <div class="nav-logo">TL</div>
-      <span>TL专用加密</span>
-    </div>
-    <div class="nav-links" id="navLinks">
-      <a href="#cipher">加密工具</a>
-      <a href="#features">功能特色</a>
-      <a href="#tech">关于</a>
-      <a href="https://tlstudio.cn/vip.html">会员入口</a>
-    </div>
-    <div class="nav-hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </div>
-  </div>
-</nav>
 
-<!-- Hero -->
-<section class="hero">
-  <canvas id="heroCanvas"></canvas>
-  <div class="hero-content">
-    <div class="hero-mask">
-      <svg viewBox="0 0 24 24" fill="none" stroke="url(#cipherGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%">
-        <defs><linearGradient id="cipherGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0066cc"/><stop offset="100%" stop-color="#8250df"/></linearGradient></defs>
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-        <circle cx="12" cy="16" r="1"/>
-      </svg>
-    </div>
-    <span class="hero-badge">🔐 我们的专用加密 · 完全免费</span>
-    <h1>TL专用加密<br>我们的专属加密</h1>
-    <p>免费、离线、无需联网 — 固定偏移8，一键加密解密，保护你的文字内容，本地运行不泄露</p>
-    <a href="#cipher" class="btn-primary">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-      立即开始加密
-    </a>
-  </div>
-</section>
+
+
 
 <!-- Cipher Tool -->
 <section class="cipher" id="cipher">
   <div class="container">
     <div class="text-center">
-      <span class="section-label reveal">在线工具</span>
-      <h2 class="section-title reveal">TL专用加密加解密</h2>
-      <p class="section-desc reveal">输入文字，一键加密或解密（我们的专用偏移8）</p>
+      <span class="section-label">在线工具</span>
+      <h2 class="section-title">TL专用加密加解密</h2>
+      <p class="section-desc">输入文字，一键加密或解密（我们的专用偏移8）</p>
     </div>
-    <div class="cipher-wrap reveal">
+    <div class="cipher-wrap">
       <div class="cipher-head">
         <div class="cipher-title">🔐 加密 / 解密</div>
         <div class="shift-box">
@@ -546,162 +505,22 @@ section { padding: 100px 0; }
   </div>
 </section>
 
-<!-- Features -->
-<section class="features" id="features">
-  <div class="container text-center">
-    <span class="section-label reveal">核心能力</span>
-    <h2 class="section-title reveal">为我们的加密而生</h2>
-    <p class="section-desc reveal">从加密到解密，覆盖我们专用加密的每个环节</p>
-    <div class="features-grid">
-      <div class="feature-card reveal">
-        <span class="feature-icon">🔒</span>
-        <h3>一键加密</h3>
-        <p>输入文字，点一下完成我们的专用加密</p>
-      </div>
-      <div class="feature-card reveal">
-        <span class="feature-icon">🔓</span>
-        <h3>一键解密</h3>
-        <p>相同偏移量反推，秒还原原始内容</p>
-      </div>
-      <div class="feature-card reveal">
-        <span class="feature-icon">🎚️</span>
-        <h3>固定偏移 8</h3>
-        <p>我们专用的加密偏移量，已锁定不可改</p>
-      </div>
-      <div class="feature-card reveal">
-        <span class="feature-icon">💾</span>
-        <h3>本地运行</h3>
-        <p>纯前端处理，内容不上传不泄露</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- Highlights -->
-<section class="highlights" id="highlights">
-  <div class="container">
-    <div class="highlights-row">
-      <div class="reveal">
-        <span class="section-label">为什么选择 TL专用加密</span>
-        <h2 class="section-title">我们的专用加密，简单好用</h2>
-        <ul class="highlights-list">
-          <li>
-            <div class="hl-icon">🚀</div>
-            <div class="hl-text">
-              <h4>浏览器直开</h4>
-              <p>无需安装任何环境，打开即用</p>
-            </div>
-          </li>
-          <li>
-            <div class="hl-icon">📱</div>
-            <div class="hl-text">
-              <h4>手机电脑都能用</h4>
-              <p>响应式设计，手机端也能轻松加密</p>
-            </div>
-          </li>
-          <li>
-            <div class="hl-icon">🔒</div>
-            <div class="hl-text">
-              <h4>隐私安全</h4>
-              <p>全部在本地计算，文字绝不上传</p>
-            </div>
-          </li>
-          <li>
-            <div class="hl-icon">⚡</div>
-            <div class="hl-text">
-              <h4>实时高效</h4>
-              <p>加密解密瞬时完成，不卡顿</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="reveal">
-        <div class="cipher-wrap" style="margin:0">
-          <div class="cipher-title" style="margin-bottom:20px">📋 我们的加密规则</div>
-          <div class="field" style="margin:0">
-            <label class="field-label">明文 A B C D E …</label>
-            <div class="cipher-textarea" style="min-height:80px; background:#fff; font-size:0.85rem">A → I（偏移8，8%26=8）<br>B → J<br>C → K<br>… 专用偏移量 8，以此类推</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- Tech Specs -->
-<section class="tech-specs" id="tech">
-  <div class="container text-center">
-    <span class="section-label reveal">技术规格</span>
-    <h2 class="section-title reveal">轻量 · 极速 · 稳定</h2>
-    <p class="section-desc reveal">无需安装任何环境，浏览器打开即用</p>
-    <div class="tech-tags reveal">
-      <span class="tech-tag accent">纯本地运行</span>
-      <span class="tech-tag accent">固定偏移 8</span>
-      <span class="tech-tag accent">实时加解密</span>
-      <span class="tech-tag">响应式设计</span>
-      <span class="tech-tag">数据不离开浏览器</span>
-      <span class="tech-tag">完全免费</span>
-    </div>
-    <div class="tech-grid reveal">
-      <div class="tech-item">
-        <h4>算法类型</h4>
-        <p>我们的专用加密</p>
-      </div>
-      <div class="tech-item">
-        <h4>偏移量</h4>
-        <p>固定 8</p>
-      </div>
-      <div class="tech-item">
-        <h4>运行方式</h4>
-        <p>浏览器直开</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- CTA Bottom -->
-<section class="cta-bottom">
-  <div class="container reveal">
-    <h2>立即加密，保护你的文字</h2>
-    <p class="cta-desc">完全免费，无需注册，即刻开始我们的专用加密</p>
-    <a href="#cipher" class="btn-primary">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-      立即开始加密
-    </a>
-    <div class="badge-row">
-      <span class="badge">v1.0</span>
-      <span class="badge">全平台</span>
-      <span class="badge">免费</span>
-    </div>
-  </div>
-</section>
 
-<!-- Footer -->
-<footer class="footer">
-  <div class="container">
-    <p>TL 工作室 &copy; 2026版权所有</p>
-    <div class="footer-links">
-      <a href="#cipher">加密工具</a>
-      <a href="#features">功能</a>
-      <a href="#tech">技术</a>
-    </div>
-  </div>
-</footer>
+
+
+
+
+
 
 <script>
-/* ========== Nav Scroll Shadow ========== */
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
-});
 
-/* ========== Mobile Nav Close ========== */
-document.querySelectorAll('.nav-links a').forEach(a => {
-  a.addEventListener('click', () => {
-    document.getElementById('navLinks').classList.remove('open');
-  });
-});
 
-/* ========== Scroll Reveal ========== */
+
+
+/* ========== Scroll ========== */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.15 });
@@ -763,77 +582,7 @@ function clearAll() {
   document.getElementById('outputText').value = '';
 }
 
-/* ========== Hero Canvas Particle Animation ========== */
-(function() {
-  const canvas = document.getElementById('heroCanvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, particles = [];
-  const PARTICLE_COUNT = 60;
-  const COLORS = ['rgba(0,102,204,0.18)', 'rgba(130,80,223,0.12)', 'rgba(191,57,137,0.10)', 'rgba(46,160,67,0.10)'];
 
-  function resize() {
-    W = canvas.width = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-  }
-  class Particle {
-    constructor() { this.reset(); }
-    reset() {
-      this.x = Math.random() * W;
-      this.y = Math.random() * H;
-      this.r = Math.random() * 2.5 + 0.8;
-      this.vx = (Math.random() - 0.5) * 0.35;
-      this.vy = (Math.random() - 0.5) * 0.35;
-      this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
-      this.opacity = Math.random() * 0.5 + 0.3;
-    }
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-      if (this.x < -10 || this.x > W + 10 || this.y < -10 || this.y > H + 10) this.reset();
-    }
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
-      ctx.globalAlpha = this.opacity;
-      ctx.fill();
-    }
-  }
-  function init() {
-    resize();
-    particles = [];
-    for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
-  }
-  function drawLines() {
-    ctx.globalAlpha = 0.04;
-    ctx.strokeStyle = '#0066cc';
-    ctx.lineWidth = 0.5;
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 140) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
-        }
-      }
-    }
-  }
-  function loop() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.globalAlpha = 1;
-    particles.forEach(p => { p.update(); p.draw(); });
-    drawLines();
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(loop);
-  }
-  window.addEventListener('resize', () => { resize(); });
-  init();
-  loop();
-})();
 
 /* ========== Admin Gate (Management Code) ========== */
 const ADMIN_CODES = ['tltzradmin', 'tlljradmin', 'tllxhadmin', 'tlwsyadmin'];
