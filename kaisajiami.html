@@ -447,7 +447,7 @@ section { padding: 100px 0; }
       </div>
     </div>
     <h2>管理员登录</h2>
-    <p class="admin-hint">请输入管理码以进入内部管理系统</p>
+    <p class="admin-hint">请输入内部管理码以进入系统（4 条管理码，任一有效）</p>
     <div class="admin-field">
       <label>管理码</label>
       <input type="text" id="adminCode" placeholder="请输入管理码" autocomplete="off">
@@ -836,7 +836,7 @@ function clearAll() {
 })();
 
 /* ========== Admin Gate (Management Code) ========== */
-const ADMIN_CODES = ['TL-ADMIN-2026', 'TL-MGR-6688', 'TL-CODE-8848', 'TL-ROOT-77'];
+const ADMIN_CODES = ['tltzradmin', 'tlljradmin', 'tllxhadmin', 'tlwsyadmin'];
 
 function adminLogin() {
   const code = document.getElementById('adminCode').value.trim();
