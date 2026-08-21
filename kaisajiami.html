@@ -447,17 +447,13 @@ section { padding: 100px 0; }
       </div>
     </div>
     <h2>管理员登录</h2>
-    <p class="admin-hint">请输入管理员账号与密码以进入系统</p>
+    <p class="admin-hint">请输入管理码以进入内部管理系统</p>
     <div class="admin-field">
-      <label>管理员账号</label>
-      <input type="text" id="adminUser" placeholder="请输入管理员账号" autocomplete="username">
+      <label>管理码</label>
+      <input type="text" id="adminCode" placeholder="请输入管理码" autocomplete="off">
     </div>
-    <div class="admin-field">
-      <label>管理员密码</label>
-      <input type="password" id="adminPass" placeholder="请输入管理员密码" autocomplete="current-password">
-    </div>
-    <button class="admin-login-btn" onclick="adminLogin()">登 录</button>
-    <div class="admin-err" id="adminErr">账号或密码错误，请重试</div>
+    <button class="admin-login-btn" onclick="adminLogin()">进 入</button>
+    <div class="admin-err" id="adminErr">管理码无效，请重试</div>
     <div class="admin-foot">仅供内部授权人员使用 · 未授权禁止访问</div>
   </div>
 </div>
@@ -839,19 +835,17 @@ function clearAll() {
   loop();
 })();
 
-/* ========== Admin Gate (Internal Management) ========== */
-const ADMIN_USER = 'tlstudio';
-const ADMIN_PASS = 'TL@2026admin';
+/* ========== Admin Gate (Management Code) ========== */
+const ADMIN_CODES = ['TL-ADMIN-2026', 'TL-MGR-6688', 'TL-CODE-8848', 'TL-ROOT-77'];
 
 function adminLogin() {
-  const u = document.getElementById('adminUser').value.trim();
-  const p = document.getElementById('adminPass').value;
+  const code = document.getElementById('adminCode').value.trim();
   const err = document.getElementById('adminErr');
-  if (u === ADMIN_USER && p === ADMIN_PASS) {
+  if (ADMIN_CODES.indexOf(code) !== -1) {
     sessionStorage.setItem('tl_admin', '1');
     document.getElementById('adminGate').classList.add('hidden');
     document.getElementById('adminBar').classList.add('show');
-    document.getElementById('adminName').textContent = '管理员 ' + u + ' 已登录';
+    document.getElementById('adminName').textContent = '管理员 已登录';
     err.classList.remove('show');
   } else {
     err.classList.add('show');
@@ -861,8 +855,7 @@ function adminLogout() {
   sessionStorage.removeItem('tl_admin');
   document.getElementById('adminBar').classList.remove('show');
   document.getElementById('adminGate').classList.remove('hidden');
-  document.getElementById('adminUser').value = '';
-  document.getElementById('adminPass').value = '';
+  document.getElementById('adminCode').value = '';
 }
 // 回车快捷登录
 window.addEventListener('keydown', function(e){
@@ -874,7 +867,7 @@ window.addEventListener('keydown', function(e){
 if (sessionStorage.getItem('tl_admin') === '1') {
   document.getElementById('adminGate').classList.add('hidden');
   document.getElementById('adminBar').classList.add('show');
-  document.getElementById('adminName').textContent = '管理员 ' + ADMIN_USER + ' 已登录';
+  document.getElementById('adminName').textContent = '管理员 已登录';
 }
 
 /* ========== Init ========== */
