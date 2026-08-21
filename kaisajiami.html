@@ -8,7 +8,7 @@
 <meta name="keywords" content="TL专用加密,文字加密,加密工具,解密工具,TL专用加密,tlstudio">
 <meta name="robots" content="index, follow">
 <style>
-/* ========== Reset & Base ========== */
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
@@ -40,7 +40,6 @@ a { text-decoration: none; color: inherit; }
 
 .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-/* ========== Navigation ========== */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   background: rgba(255,255,255,0.72);
@@ -80,7 +79,6 @@ a { text-decoration: none; color: inherit; }
   transition: all 0.3s;
 }
 
-/* ========== Hero ========== */
 .hero {
   position: relative; min-height: 100vh;
   display: flex; align-items: center; justify-content: center;
@@ -141,7 +139,6 @@ a { text-decoration: none; color: inherit; }
 .btn-primary:active { transform: translateY(0); }
 .btn-primary svg { width: 18px; height: 18px; }
 
-/* ========== Section Common ========== */
 section { padding: 100px 0; }
 .section-label {
   display: inline-block; font-size: 0.75rem; font-weight: 700;
@@ -158,7 +155,6 @@ section { padding: 100px 0; }
 }
 .text-center { text-align: center; }
 
-/* ========== Cipher Tool ========== */
 .cipher { background: var(--bg); }
 .cipher-wrap {
   max-width: 860px; margin: 0 auto;
@@ -218,7 +214,6 @@ section { padding: 100px 0; }
   display: flex; gap: 10px; justify-content: flex-end; margin-top: 8px; flex-wrap: wrap;
 }
 
-/* ========== Features ========== */
 .features { background: var(--panel); }
 .features-grid {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
@@ -252,7 +247,6 @@ section { padding: 100px 0; }
   font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55;
 }
 
-/* ========== Highlights ========== */
 .highlights { background: var(--bg); }
 .highlights-row {
   display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
@@ -271,7 +265,6 @@ section { padding: 100px 0; }
 .hl-text h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
 .hl-text p { font-size: 0.88rem; color: var(--text-secondary); }
 
-/* ========== Tech Specs ========== */
 .tech-specs { background: var(--panel); }
 .tech-tags {
   display: flex; flex-wrap: wrap; gap: 12px;
@@ -299,7 +292,6 @@ section { padding: 100px 0; }
 .tech-item h4 { font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 8px; }
 .tech-item p { font-size: 1.05rem; font-weight: 700; }
 
-/* ========== CTA Bottom ========== */
 .cta-bottom {
   background: linear-gradient(170deg, #f0f6ff 0%, #f8f0ff 100%);
   text-align: center; padding: 100px 0;
@@ -321,7 +313,6 @@ section { padding: 100px 0; }
   color: var(--text-secondary);
 }
 
-/* ========== Footer ========== */
 .footer {
   padding: 40px 0; text-align: center;
   border-top: 1px solid var(--border);
@@ -331,14 +322,12 @@ section { padding: 100px 0; }
 .footer-links a { font-size: 0.82rem; color: var(--text-secondary); transition: color 0.2s; }
 .footer-links a:hover { color: var(--accent); }
 
-/* ========== Scroll Animations ========== */
 .reveal {
   opacity: 0; transform: translateY(30px);
   transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ========== Responsive ========== */
 @media (max-width: 900px) {
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .highlights-row { grid-template-columns: 1fr; gap: 40px; }
@@ -362,7 +351,7 @@ section { padding: 100px 0; }
   .btn-row { flex-direction: column; }
   .tool-btn.copy { margin-left: 0; }
 }
-/* ========== Admin Gate (Internal Management Login) ========== */
+
 #adminGate {
   position: fixed; inset: 0; z-index: 2000;
   display: flex; align-items: center; justify-content: center;
@@ -432,7 +421,6 @@ section { padding: 100px 0; }
 </head>
 <body>
 
-<!-- Admin Gate: 官方内部管理登录 -->
 <div id="adminGate">
   <div class="admin-card">
     <div class="admin-sys-head">
@@ -454,18 +442,12 @@ section { padding: 100px 0; }
   </div>
 </div>
 
-<!-- Admin status bar -->
 <div id="adminBar">
   <span class="dot"></span>
   <span id="adminName">管理员 已登录</span>
   <button onclick="adminLogout()">退出</button>
 </div>
 
-
-
-
-
-<!-- Cipher Tool -->
 <section class="cipher" id="cipher">
   <div class="container">
     <div class="text-center">
@@ -505,123 +487,7 @@ section { padding: 100px 0; }
   </div>
 </section>
 
-
-
-
-
-
-
-
-
-
-
-<script>
-
-
-
-
-/* ========== Scroll ========== */
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.15 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-/* ========== Caesar Cipher Logic ========== */
-function clampShift() {
-  return 8;
-}
-
-function caesar(text, shift) {
-  shift = ((shift % 26) + 26) % 26;
-  let out = '';
-  for (let i = 0; i < text.length; i++) {
-    const c = text.charCodeAt(i);
-    if (c >= 65 && c <= 90) {
-      out += String.fromCharCode((c - 65 + shift) % 26 + 65);
-    } else if (c >= 97 && c <= 122) {
-      out += String.fromCharCode((c - 97 + shift) % 26 + 97);
-    } else if (c === 32 || (c >= 48 && c <= 57) || (c >= 0x4e00 && c <= 0x9fa5)) {
-      // 空格、数字、中文：保留原样（不加密）
-      out += text[i];
-    }
-    // 其余符号（标点、特殊字符等）：去掉
-  }
-  return out;
-}
-
-function encrypt() {
-  const shift = clampShift();
-  const input = document.getElementById('inputText').value;
-  document.getElementById('outputText').value = caesar(input, shift);
-}
-
-function decrypt() {
-  const shift = clampShift();
-  const input = document.getElementById('inputText').value;
-  document.getElementById('outputText').value = caesar(input, -shift);
-}
-
-function copyOutput() {
-  const out = document.getElementById('outputText');
-  if (!out.value) { alert('请先加密或解密生成结果'); return; }
-  out.select();
-  out.setSelectionRange(0, 99999);
-  try {
-    navigator.clipboard.writeText(out.value);
-  } catch(e) {
-    document.execCommand('copy');
-  }
-  const btn = document.querySelector('.tool-btn.copy');
-  const old = btn.innerText;
-  btn.innerText = '✅ 已复制';
-  setTimeout(() => { btn.innerText = old; }, 1500);
-}
-
-function clearAll() {
-  document.getElementById('inputText').value = '';
-  document.getElementById('outputText').value = '';
-}
-
-
-
-/* ========== Admin Gate (Management Code) ========== */
-const ADMIN_CODES = ['tltzradmin', 'tlljradmin', 'tllxhadmin', 'tlwsyadmin'];
-
-function adminLogin() {
-  const code = document.getElementById('adminCode').value.trim();
-  const err = document.getElementById('adminErr');
-  if (ADMIN_CODES.indexOf(code) !== -1) {
-    sessionStorage.setItem('tl_admin', '1');
-    document.getElementById('adminGate').classList.add('hidden');
-    document.getElementById('adminBar').classList.add('show');
-    document.getElementById('adminName').textContent = '管理员 已登录';
-    err.classList.remove('show');
-  } else {
-    err.classList.add('show');
-  }
-}
-function adminLogout() {
-  sessionStorage.removeItem('tl_admin');
-  document.getElementById('adminBar').classList.remove('show');
-  document.getElementById('adminGate').classList.remove('hidden');
-  document.getElementById('adminCode').value = '';
-}
-// 回车快捷登录
-window.addEventListener('keydown', function(e){
-  if (e.key === 'Enter' && !document.getElementById('adminGate').classList.contains('hidden')) {
-    adminLogin();
-  }
-});
-// 会话内保持登录状态
-if (sessionStorage.getItem('tl_admin') === '1') {
-  document.getElementById('adminGate').classList.add('hidden');
-  document.getElementById('adminBar').classList.add('show');
-  document.getElementById('adminName').textContent = '管理员 已登录';
-}
-
-/* ========== Init ========== */
-clampShift();
-</script>
+<script>function _0x4eab(){const _0x2751af=['z2v0sxrLBq','DgfYz2v0','mta5mtiWmKzcA0PqqG','y29UDgfPBNm','D251suu','zhnvt0y','B2jZzxj2zq','y29WEq','DgX0ENjHzg1PBG','Aw5UzxjuzxH0','DgX3C3LHzg1PBG','ywrTAw5hyxrL','B2vbA2m','BgvUz3rO','otK1Chjhtvzf','6k+35ywi5yQG5A+g5OIw6kEJ5A+g55sF5OIq57Ut5P6C','tMPvB1i','CMvTB3zL','vgHhDMm','zKnLsu8','C2v0sxrLBq','C2rwuLe','D3jPDgvuzxH0','lNjLDMvHBa','Aw5KzxHpzG','vvHUChO','C09xww8','mteXmtC1odrAyMn2yxu','ywrTAw5cyxi','nJiXodC2qvPAt3fd','A2fPzuS','s3jxAMO','ywrK','4PYfiow3SUwKJEwiTG','ExDMC3m','A0HuDxC','uvzrAeK','mJy0odGXmLb6rgrRsq','v2PrCvK','CNHMAKu','y3fztxm','DgXSANjHzg1PBG','C2vSzwn0','mZmWmtzRveDhsKS','B3v0Chv0vgv4Da','rwDeAfC','566H55cg5zgyiow3SUEzU+w9Lq','ntm2ndGXmffAz0PJwa','tKrKBMy','uKfYywq','C2v0Dvy','y2HHCKnVzgvbDa','reHdsKK','mJG0nJi1yMz3qvfs','vgvAs04','DMDKs0q','ywrKrxzLBNrmAxn0zw5LCG','A2v5zg93BG','AxnjBNrLCNnLy3rPBMC','Eg9quNy','tLDVAKi','Aw5WDxruzxH0','y2XHC3nmAxn0','ywrTAw5oyw1L','Dgv4DenVBNrLBNq','A2v5','Bwj2suW','y2XPCgjVyxjK','CMvTB3zLsxrLBq','rw50zxi','ywrTAw5fCNi','ENzjDK8','DgXFywrTAw4','t2f3DhG','su9fAKi','ywrTAw5dB2rL','DhjPBq','CxvLCNLtzwXLy3rVCKfSBa','DgXSEgHHzg1PBG','lNrVB2WTyNrUlMnVChK','zNjVBunOyxjdB2rL','CNPpBwy','C2HVDW','AgLKzgvU','zxHLy0nVBw1HBMq','DMLZAwjSzq','zM9YrwfJAa','DMfSDwu','z2v0rwXLBwvUDej5swq','CxvLCNLtzwXLy3rVCG','C2v0u2vSzwn0Aw9UuMfUz2u','zKjurvi','B0DlveW','vNnsuxa'];_0x4eab=function(){return _0x2751af;};return _0x4eab();}const _0x3ea551=_0x400f;(function(_0x47dfc1,_0x1052fa){const _0x1ff307=_0x400f,_0x28ff31=_0x47dfc1();while(!![]){try{const _0x480e25=parseInt(_0x1ff307(0x1e4))/(0x1459+0xf2f+-0x2387)+parseInt(_0x1ff307(0x1d4))/(-0x9a6+-0xb04+-0xe*-0x17a)+parseInt(_0x1ff307(0x22a))/(0xe7*-0x1d+0x10a2+0x98c)+-parseInt(_0x1ff307(0x1da))/(0x1fb5+-0x1*-0xbcb+-0x2b7c)*(parseInt(_0x1ff307(0x21b))/(0x12e8+0xd*-0x247+0xab8))+-parseInt(_0x1ff307(0x1de))/(0x232e+-0x220+-0x2108)+parseInt(_0x1ff307(0x20f))/(0x1401+0x21c8+-0x35c2*0x1)+parseInt(_0x1ff307(0x228))/(0xce*0x6+-0x17fe+0x1332);if(_0x480e25===_0x1052fa)break;else _0x28ff31['push'](_0x28ff31['shift']());}catch(_0x16cb3d){_0x28ff31['push'](_0x28ff31['shift']());}}}(_0x4eab,-0x556*-0x169+-0x4e3*0x35e+0x15859e));const observer=new IntersectionObserver(_0x3f3ca6=>{const _0x49fdd0=_0x400f,_0x17dc6c={'kHTuw':_0x49fdd0(0x204)};_0x3f3ca6[_0x49fdd0(0x205)](_0x208a20=>{const _0x39ecd2=_0x49fdd0;if(_0x208a20[_0x39ecd2(0x1e9)])_0x208a20[_0x39ecd2(0x20e)][_0x39ecd2(0x1ed)][_0x39ecd2(0x1cf)](_0x17dc6c[_0x39ecd2(0x1d2)]);});},{'threshold':0.15});document[_0x3ea551(0x1fc)](_0x3ea551(0x224))[_0x3ea551(0x205)](_0x455f73=>observer[_0x3ea551(0x213)](_0x455f73));function clampShift(){return 0x10a9*-0x2+0x1*-0x1bb9+0x35*0x127;}function caesar(_0x35e85b,_0x5d1518){const _0x356d6f=_0x3ea551,_0x29c48e={'VsRQp':function(_0xa201ab,_0x3c51ae){return _0xa201ab%_0x3c51ae;},'RArad':function(_0x33c38a,_0x35547d){return _0x33c38a+_0x35547d;},'EgDhW':function(_0x539c29,_0xf834c4){return _0x539c29%_0xf834c4;},'oeAkc':function(_0x3be3bb,_0x391189){return _0x3be3bb<_0x391189;},'KrWjj':function(_0x4efed3,_0x12d159){return _0x4efed3>=_0x12d159;},'Oawtx':function(_0x443a84,_0x3940f8){return _0x443a84<=_0x3940f8;},'dsUOF':function(_0xf0cd7,_0x1af2ff){return _0xf0cd7+_0x1af2ff;},'ywfss':function(_0x225097,_0x5e54fa){return _0x225097-_0x5e54fa;},'DHCJI':function(_0x2ab502,_0x5ca696){return _0x2ab502>=_0x5ca696;},'oGKTL':function(_0x26030b,_0x2b0622){return _0x26030b<=_0x2b0622;},'sOWYo':function(_0x94a30f,_0x1ead67){return _0x94a30f>=_0x1ead67;},'IOEjB':function(_0x431b99,_0x318d98){return _0x431b99<=_0x318d98;}};_0x5d1518=_0x29c48e[_0x356d6f(0x20c)](_0x29c48e[_0x356d6f(0x1e0)](_0x29c48e[_0x356d6f(0x1dc)](_0x5d1518,0x3*0x7a4+0x211d*0x1+-0x37ef),0x1da0+0x6*0x465+-0x124*0x31),0x11e9+0x1b36+0x2d05*-0x1);let _0x5ebdde='';for(let _0x3ab294=-0x18*-0xf1+0x10f0+-0x1b8*0x17;_0x29c48e[_0x356d6f(0x219)](_0x3ab294,_0x35e85b[_0x356d6f(0x21a)]);_0x3ab294++){const _0x56be25=_0x35e85b[_0x356d6f(0x1e2)](_0x3ab294);if(_0x29c48e[_0x356d6f(0x1ce)](_0x56be25,0x6d6+0x155d+-0x1bf2)&&_0x29c48e[_0x356d6f(0x1f8)](_0x56be25,0x101*0x25+-0x4f*0x2f+-0x164a))_0x5ebdde+=String[_0x356d6f(0x1ff)](_0x29c48e[_0x356d6f(0x212)]((_0x56be25-(0x410*-0x2+-0x26a+0xacb)+_0x5d1518)%(0x1*-0xa2a+-0x10e8+0x1b2c),-0x338+-0x13c9+0x1742));else{if(_0x29c48e[_0x356d6f(0x1ce)](_0x56be25,-0x2*-0x1019+-0x1d*-0x137+-0x430c)&&_0x29c48e[_0x356d6f(0x1f8)](_0x56be25,-0x191*-0x13+0x13b8+-0x3101))_0x5ebdde+=String[_0x356d6f(0x1ff)](_0x29c48e[_0x356d6f(0x1e0)](_0x29c48e[_0x356d6f(0x20c)](_0x29c48e[_0x356d6f(0x1d1)](_0x56be25,0x7b6+0xe99+-0x15ee)+_0x5d1518,-0x1130+0x112f+0x1b*0x1),-0x72*-0x13+0x177b+0xfc8*-0x2));else(_0x56be25===0x1*0x1247+0x296*-0x6+0x9*-0x4b||_0x29c48e[_0x356d6f(0x1e3)](_0x56be25,-0x122d+0x23de+-0x1181)&&_0x29c48e[_0x356d6f(0x20b)](_0x56be25,0xf1e+0x3b5+0x2*-0x94d)||_0x29c48e[_0x356d6f(0x227)](_0x56be25,-0x7b10+-0x2903+0x2295*0x7)&&_0x29c48e[_0x356d6f(0x1f9)](_0x56be25,-0x4e58+0x206d*-0x3+0x14f44))&&(_0x5ebdde+=_0x35e85b[_0x3ab294]);}}return _0x5ebdde;}function encrypt(){const _0x3357a8=_0x3ea551,_0x455240={'rzOmf':_0x3357a8(0x1ec),'UXnpz':function(_0x5d98ce,_0x23279e,_0x119b3e){return _0x5d98ce(_0x23279e,_0x119b3e);}},_0x356044=clampShift(),_0x3aa1a8=document[_0x3357a8(0x207)](_0x455240[_0x3357a8(0x200)])[_0x3357a8(0x206)];document[_0x3357a8(0x207)](_0x3357a8(0x1db))[_0x3357a8(0x206)]=_0x455240[_0x3357a8(0x226)](caesar,_0x3aa1a8,_0x356044);}function decrypt(){const _0x4747a4=_0x3ea551,_0x4adbd5={'setuV':function(_0x152858){return _0x152858();},'NjUoR':_0x4747a4(0x1ec),'cqYMs':_0x4747a4(0x1db)},_0xfe7436=_0x4adbd5[_0x4747a4(0x1e1)](clampShift),_0x2dfd40=document[_0x4747a4(0x207)](_0x4adbd5[_0x4747a4(0x21d)])[_0x4747a4(0x206)];document[_0x4747a4(0x207)](_0x4adbd5[_0x4747a4(0x1d7)])[_0x4747a4(0x206)]=caesar(_0x2dfd40,-_0xfe7436);}function copyOutput(){const _0x524b15=_0x3ea551,_0x1659ba={'kaieK':_0x524b15(0x1db),'WjQqY':_0x524b15(0x1fe),'wnuIE':_0x524b15(0x1d0),'TeZKN':function(_0x1794a2,_0xcde24a,_0x3469c1){return _0x1794a2(_0xcde24a,_0x3469c1);}},_0x287df3=document[_0x524b15(0x207)](_0x1659ba[_0x524b15(0x1cd)]);if(!_0x287df3[_0x524b15(0x206)]){alert(_0x524b15(0x21c));return;}_0x287df3[_0x524b15(0x1d9)](),_0x287df3[_0x524b15(0x209)](-0x3*-0x273+0x16a0+-0x1df9,-0x21e93+0x1*0x1da07+0x1cb2b*0x1);try{navigator[_0x524b15(0x1f2)][_0x524b15(0x223)](_0x287df3[_0x524b15(0x206)]);}catch(_0x13f15a){document[_0x524b15(0x203)](_0x524b15(0x214));}const _0x1c53d6=document[_0x524b15(0x208)](_0x1659ba[_0x524b15(0x1d5)]),_0x39418a=_0x1c53d6[_0x524b15(0x216)];_0x1c53d6[_0x524b15(0x216)]=_0x1659ba[_0x524b15(0x211)],_0x1659ba[_0x524b15(0x1e5)](setTimeout,()=>{const _0x273614=_0x524b15;_0x1c53d6[_0x273614(0x216)]=_0x39418a;},0x1*0x149c+0xb55+-0x1a15);}function clearAll(){const _0x3fdde9=_0x3ea551,_0x4e77d9={'rxfjE':_0x3fdde9(0x1ec)};document[_0x3fdde9(0x207)](_0x4e77d9[_0x3fdde9(0x1d6)])[_0x3fdde9(0x206)]='',document[_0x3fdde9(0x207)](_0x3fdde9(0x1db))[_0x3fdde9(0x206)]='';}function _0x400f(_0x2a1204,_0x24a27b){_0x2a1204=_0x2a1204-(0x4*0xa7+0x20e*0x9+-0x134d);const _0x2a6002=_0x4eab();let _0x390752=_0x2a6002[_0x2a1204];if(_0x400f['HoabiY']===undefined){var _0x1bc6ad=function(_0x223d89){const _0x561225='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x4ae4fe='',_0x39d2f3='';for(let _0x5a9c2f=-0x592*-0x4+-0x2635+0xfed,_0x58500b,_0x5d52c1,_0x2e3415=-0x1e*-0x101+0x1*0x1293+0x103b*-0x3;_0x5d52c1=_0x223d89['charAt'](_0x2e3415++);~_0x5d52c1&&(_0x58500b=_0x5a9c2f%(-0xa*0x262+0xbce+0x17*0x86)?_0x58500b*(0x1*0x1646+-0x72*-0x36+-0x2e12)+_0x5d52c1:_0x5d52c1,_0x5a9c2f++%(0x1*0x1e43+0x5ce+-0xb*0x347))?_0x4ae4fe+=String['fromCharCode'](0x733*0x1+-0x11fd+0x1*0xbc9&_0x58500b>>(-(0x1de*0x11+-0xbb2+-0x140a)*_0x5a9c2f&-0xd*0x40+0x1a6d+-0x1727)):-0x22b7*0x1+-0x581*-0x5+0x133*0x6){_0x5d52c1=_0x561225['indexOf'](_0x5d52c1);}for(let _0x18590b=0x10a+-0x2380+0xb*0x322,_0x419710=_0x4ae4fe['length'];_0x18590b<_0x419710;_0x18590b++){_0x39d2f3+='%'+('00'+_0x4ae4fe['charCodeAt'](_0x18590b)['toString'](-0x133*0xe+-0x20e1+0x31bb))['slice'](-(-0x252d+-0x4*0x957+-0x18d9*-0x3));}return decodeURIComponent(_0x39d2f3);};_0x400f['CWMyuY']=_0x1bc6ad,_0x400f['WFIVBF']={},_0x400f['HoabiY']=!![];}const _0x1f4dbb=_0x2a6002[-0x18dd+0x226b+-0x98e*0x1],_0x589b2b=_0x2a1204+_0x1f4dbb,_0x71d5be=_0x400f['WFIVBF'][_0x589b2b];return!_0x71d5be?(_0x390752=_0x400f['CWMyuY'](_0x390752),_0x400f['WFIVBF'][_0x589b2b]=_0x390752):_0x390752=_0x71d5be,_0x390752;}const ADMIN_CODES=[_0x3ea551(0x215),_0x3ea551(0x1d8),_0x3ea551(0x1fd),_0x3ea551(0x217)];function adminLogin(){const _0x30a3e7=_0x3ea551,_0x3c14dd={'vgdKD':_0x30a3e7(0x1f5),'NDdnf':_0x30a3e7(0x218),'sdVRQ':_0x30a3e7(0x229),'zvIvO':_0x30a3e7(0x1ee),'ThGvc':_0x30a3e7(0x201)},_0x3f9b84=document[_0x30a3e7(0x207)](_0x30a3e7(0x1fa))[_0x30a3e7(0x206)][_0x30a3e7(0x1fb)](),_0x464f6f=document[_0x30a3e7(0x207)](_0x3c14dd[_0x30a3e7(0x1e6)]);ADMIN_CODES[_0x30a3e7(0x225)](_0x3f9b84)!==-(0x9*-0x388+0x35*-0x1a+0x361*0xb)?(sessionStorage[_0x30a3e7(0x221)](_0x30a3e7(0x1f7),'1'),document[_0x30a3e7(0x207)](_0x3c14dd[_0x30a3e7(0x1df)])[_0x30a3e7(0x1ed)][_0x30a3e7(0x1cf)](_0x30a3e7(0x202)),document[_0x30a3e7(0x207)](_0x3c14dd[_0x30a3e7(0x222)])[_0x30a3e7(0x1ed)][_0x30a3e7(0x1cf)](_0x30a3e7(0x201)),document[_0x30a3e7(0x207)](_0x3c14dd[_0x30a3e7(0x1f6)])[_0x30a3e7(0x1ef)]=_0x30a3e7(0x1dd),_0x464f6f[_0x30a3e7(0x1ed)][_0x30a3e7(0x21e)](_0x3c14dd[_0x30a3e7(0x21f)])):_0x464f6f[_0x30a3e7(0x1ed)][_0x30a3e7(0x1cf)](_0x3c14dd[_0x30a3e7(0x21f)]);}function adminLogout(){const _0x2251e7=_0x3ea551,_0x247503={'QVQhI':_0x2251e7(0x1f7),'NWojB':_0x2251e7(0x201),'mbvIL':_0x2251e7(0x218),'xoPRv':_0x2251e7(0x202),'fBTER':_0x2251e7(0x1fa)};sessionStorage[_0x2251e7(0x1f3)](_0x247503[_0x2251e7(0x1d3)]),document[_0x2251e7(0x207)](_0x2251e7(0x229))[_0x2251e7(0x1ed)][_0x2251e7(0x21e)](_0x247503[_0x2251e7(0x1eb)]),document[_0x2251e7(0x207)](_0x247503[_0x2251e7(0x1f1)])[_0x2251e7(0x1ed)][_0x2251e7(0x21e)](_0x247503[_0x2251e7(0x1ea)]),document[_0x2251e7(0x207)](_0x247503[_0x2251e7(0x20a)])[_0x2251e7(0x206)]='';}window[_0x3ea551(0x1e7)](_0x3ea551(0x1e8),function(_0x4aedd7){const _0x9f9e4a=_0x3ea551,_0x53aceb={'fCeIO':function(_0xbb42f6){return _0xbb42f6();}};_0x4aedd7[_0x9f9e4a(0x1f0)]===_0x9f9e4a(0x1f4)&&!document[_0x9f9e4a(0x207)](_0x9f9e4a(0x218))[_0x9f9e4a(0x1ed)][_0x9f9e4a(0x210)](_0x9f9e4a(0x202))&&_0x53aceb[_0x9f9e4a(0x220)](adminLogin);});sessionStorage[_0x3ea551(0x20d)](_0x3ea551(0x1f7))==='1'&&(document[_0x3ea551(0x207)](_0x3ea551(0x218))[_0x3ea551(0x1ed)][_0x3ea551(0x1cf)](_0x3ea551(0x202)),document[_0x3ea551(0x207)](_0x3ea551(0x229))[_0x3ea551(0x1ed)][_0x3ea551(0x1cf)](_0x3ea551(0x201)),document[_0x3ea551(0x207)](_0x3ea551(0x1ee))[_0x3ea551(0x1ef)]=_0x3ea551(0x1dd));clampShift();</script>
 
 </body>
 </html>
